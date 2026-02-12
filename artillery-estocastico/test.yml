@@ -1,0 +1,19 @@
+config:
+  target: "http://localhost:666"
+  phases:
+    - duration: 60
+      arrivalCount: 1
+  processor: "./processor.js"
+
+scenarios:
+  - name: "Reto 1"
+    flow:
+      - function: "initPoisson"
+      - loop:
+          - function: "configurarOleada"
+          - post:
+              url: "/ordenes"
+              json:
+                tipo: "{{ tipo }}"
+                cantidad: "{{ cantidad }}"
+                usuario: "{{ usuario }}"

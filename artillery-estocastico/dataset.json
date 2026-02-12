@@ -1,0 +1,8 @@
+[
+  { "tipo": "venta",  "cantidad": 10,  "usuario": "trader_alpha" },
+  { "tipo": "compra", "cantidad": 5,   "usuario": "neo_broker" },
+  { "tipo": "venta",  "cantidad": 20,  "usuario": "market_wolf" },
+  { "tipo": "compra", "cantidad": 15,  "usuario": "crypto_fox" },
+  { "tipo": "venta",  "cantidad": 7,   "usuario": "bull_master" },
+  { "tipo": "compra", "cantidad": 50,  "usuario": "dark_liquidity" }
+]
