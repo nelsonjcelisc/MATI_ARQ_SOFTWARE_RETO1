@@ -1,6 +1,7 @@
 package co.edu.uniandes.matchengine.apihandler;
 
 import co.edu.uniandes.matchengine.apihandler.dto.OrdenDTO;
+import org.springframework.cloud.stream.function.StreamBridge; // NUEVO
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import java.util.Map;
@@ -9,19 +10,23 @@ import java.util.Map;
 @RequestMapping("/api")
 public class OrdenController {
 
-    // Endpoint para COMPRADOR
+    private final StreamBridge streamBridge; // NUEVO: El puente al Bus de Eventos
+
+    // Constructor para inyectar el Bridge
+    public OrdenController(StreamBridge streamBridge) {
+        this.streamBridge = streamBridge;
+    }
+
     @PostMapping("/orden-compra")
     public ResponseEntity<OrdenDTO> recibirCompra(@RequestBody Map<String, Object> payload) {
         return procesarOrden(payload, "COMPRA");
     }
 
-    // Endpoint para VENDEDOR
     @PostMapping("/orden-venta")
     public ResponseEntity<OrdenDTO> recibirVenta(@RequestBody Map<String, Object> payload) {
         return procesarOrden(payload, "VENTA");
     }
 
-    // Método privado para no repetir código (DRY)
     private ResponseEntity<OrdenDTO> procesarOrden(Map<String, Object> payload, String tipo) {
         OrdenDTO orden = new OrdenDTO(
             payload.get("id").toString(),
@@ -30,10 +35,14 @@ public class OrdenController {
             tipo
         );
         
-        // Registro de salida hacia el Gestor de Eventos (AMQP)
         orden.registrarHito("apihandler_salida");
 
-        System.out.println("Procesando " + tipo + " para el producto: " + orden.getProducto());
+        // --- PUBLICACIÓN AL BUS ---
+        // 'enviarOrden-out-0' es el nombre del canal que usaremos en el application.yml
+        streamBridge.send("enviarOrden-out-0", orden); 
+        // --------------------------
+
+        System.out.println("Enviado a RabbitMQ: " + tipo + " de " + orden.getProducto());
         
         return ResponseEntity.ok(orden);
     }

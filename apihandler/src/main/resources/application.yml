@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    function:
+      definition: processOrder # Nombre del método que enviará/recibirá
+    stream:
+      bindings:
+        processOrder-out-0: # 'out' para el API Handler que envía
+          destination: orders-exchange
+      rabbit:
+        bindings:
+          processOrder-out-0:
+            producer:
+              routing-key-expression: "'order.new'"
+  rabbitmq:
+    host: rabbitmq #${SPRING_RABBITMQ_HOST:localhost}
+    port: 5672

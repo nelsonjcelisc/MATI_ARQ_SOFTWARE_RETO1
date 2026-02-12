@@ -13,3 +13,13 @@ services:
     image: apihandler-reto1:v1
     environment:
       - JAVA_OPTS=-Xmx512m -Xms256m
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-broker
+    ports:
+      - "5672:5672"    # Comunicación de datos (AMQP)
+      - "15672:15672"  # Dashboard administrativo
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
