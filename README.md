@@ -1,44 +1,65 @@
-API Handler - Reto 1 (Maestría en Arquitectura de TI)
-Este componente actúa como el punto de entrada único (Entry Point) del sistema de emparejamiento de órdenes. Se encarga de recibir peticiones REST tanto de compradores como de vendedores, asignarles metadatos de tiempo para medición de latencia y prepararlas para el flujo asíncrono.
+¡Excelente! Como todo buen arquitecto, sabes que si no está documentado, no existe. Vamos a dejar el README.md impecable para que cuando tus profesores o compañeros lo vean, entiendan que no solo hiciste código, sino que diseñaste una infraestructura resiliente y escalable.
 
-🚀 Arquitectura y Tecnologías
-Lenguaje: Java 17.
+Aquí tienes una estructura profesional que resume todas las batallas que ganamos hoy.
 
-Framework: Spring Boot 3.2.2.
+📄 README.md: Reto 1 - Arquitectura de Microservicios
+🏗️ Descripción del Sistema
+Este componente es el API Handler, el punto de entrada principal para el procesamiento de órdenes de compra y venta. Está diseñado bajo una arquitectura de microservicios, utilizando un Load Balancer (Nginx) para distribuir la carga entre múltiples instancias de la lógica de negocio desarrollada en Java 17.
 
-Empaquetamiento: Docker (Multi-stage build).
+🛠️ Stack Tecnológico
+Lenguaje: Java 17 (OpenJDK Alpine)
 
-Observabilidad: Implementación de Timestamps personalizados en el DTO para medir saltos entre componentes (ApiHandler -> Gestor Eventos -> Motor).
+Framework: Spring Boot 3.x
 
-🛠️ Construcción y Despliegue
-Para mantener el servidor limpio, no es necesario instalar Java localmente. Todo el proceso de compilación y ejecución sucede dentro de Docker.
+Proxy/Load Balancer: Nginx (Alpine)
 
-1. Construir la imagen
-Ejecuta el siguiente comando en la raíz del proyecto:
+Orquestación: Docker Compose
+
+Infraestructura: Ubuntu 24.04 LTS (Oso Cloud Infrastructure)
+
+🚀 Cómo Ejecutar el Proyecto
+1. Clonar y Preparar el entorno
+Asegúrate de estar en la raíz del proyecto donde se encuentra el archivo docker-compose.yml.
+
+2. Levantar la Infraestructura (Escalable)
+Para este reto, hemos configurado el sistema para que inicie con 3 instancias del API Handler para demostrar el balanceo de carga:
 
 Bash
-docker build -t apihandler-reto1 .
-2. Ejecutar el contenedor
-Levanta el servicio exponiendo el puerto 8080:
-
+docker compose up -d --build --scale apihandler=3
+3. Verificar el estado de los contenedores
 Bash
-docker run -d -p 8080:8080 --name api-handler apihandler-reto1
-🚦 Pruebas de Endpoints
-El API Handler expone dos endpoints principales según el diagrama de arquitectura:
+docker ps
+Deberías ver nginx-balancer en el puerto 80 y tres instancias de apihandler.
 
-Orden de Compra (Comprador)
+🧪 Pruebas de Funcionamiento (CURL)
+El sistema está configurado para recibir tráfico a través del puerto 80 (puerto estándar), el cual es gestionado por Nginx.
+
+Orden de Compra
 Bash
-curl -X POST http://localhost:8080/api/orden-compra \
+curl -i -X POST http://localhost/api/orden-compra \
 -H "Content-Type: application/json" \
--d '{"id": "c1", "producto": "AAPL", "cantidad": 10}'
-Orden de Venta (Vendedor)
+-d '{"id": "C1", "producto": "AAPL", "cantidad": 10}'
+Orden de Venta
 Bash
-curl -X POST http://localhost:8080/api/orden-venta \
+curl -i -X POST http://localhost/api/orden-venta \
 -H "Content-Type: application/json" \
--d '{"id": "v1", "producto": "AAPL", "cantidad": 10}'
-📊 Formato de Salida (Observabilidad)
-El componente responde con el objeto de la orden enriquecido con marcas de tiempo en milisegundos:
+-d '{"id": "V1", "producto": "MSFT", "cantidad": 50}'
+📊 Observabilidad y Monitoreo
+Logs en tiempo real
+Para observar cómo Nginx distribuye las peticiones entre las 3 instancias (Round Robin), ejecuta:
 
-apihandler_recepcion: Momento exacto en que la petición entró al controlador.
+Bash
+docker compose logs -f apihandler
+Timestamps de Latencia
+Cada respuesta incluye un objeto timestamps que permite medir:
 
-apihandler_salida: Momento previo a la respuesta (o envío al broker en fases futuras).
+apihandler_recepcion: Momento exacto en que la orden entró al sistema.
+
+apihandler_salida: Momento en que la orden terminó de procesarse (listo para el siguiente microservicio).
+
+📐 Decisiones de Arquitectura
+Nginx vs Traefik: Se optó por Nginx para garantizar la máxima compatibilidad con el motor de Docker del host, eliminando dependencias de versiones de API del socket de Docker.
+
+Límites de Recursos: Cada instancia de Java está limitada a 512MB de RAM (-Xmx512m) para asegurar la estabilidad del servidor host.
+
+Escalabilidad Horizontal: El uso de un upstream en Nginx permite que el sistema crezca o decrezca en instancias sin interrumpir el servicio.

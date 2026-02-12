@@ -11,6 +11,5 @@ services:
   apihandler:
     build: ./apihandler
     image: apihandler-reto1:v1
-    container_name: api-handler-service
     environment:
       - JAVA_OPTS=-Xmx512m -Xms256m
