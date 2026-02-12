@@ -1,16 +1,19 @@
 spring:
   cloud:
-    function:
-      definition: processOrder # Nombre del método que enviará/recibirá
     stream:
       bindings:
-        processOrder-out-0: # 'out' para el API Handler que envía
-          destination: orders-exchange
+        # 1. Cambiamos el nombre para que coincida con el Controller
+        enviarOrden-out-0: 
+          destination: exchange.ordenes.fanout # El nombre del "repartidor"
       rabbit:
         bindings:
-          processOrder-out-0:
+          enviarOrden-out-0:
             producer:
-              routing-key-expression: "'order.new'"
+              # 2. LA CLAVE: Declaramos que es un Fanout (Multicast)
+              exchangeType: fanout 
+              # En Fanout no necesitamos routing-key porque le llega a TODOS
   rabbitmq:
-    host: rabbitmq #${SPRING_RABBITMQ_HOST:localhost}
+    host: rabbitmq
     port: 5672
+    username: guest
+    password: guest

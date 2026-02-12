@@ -32,6 +32,7 @@ public class OrdenDTO {
     public byte getTipo() { return tipo; }
     
     public long getTs_api_recepcion() { return ts_api_recepcion; }
+    public long getTs_api_salida() { return ts_api_salida; }
     public void setTs_api_salida(long ts) { this.ts_api_salida = ts; }
     public void setTs_rabbit_recepcion(long ts) { this.ts_rabbit_recepcion = ts; }
     public void setTs_engine_match(long ts) { this.ts_engine_match = ts; }

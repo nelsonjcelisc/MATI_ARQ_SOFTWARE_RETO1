@@ -1,0 +1,24 @@
+spring:
+  datasource:
+      url: jdbc:postgresql://db-journal:5432/trading_db
+      username: admin
+      password: password
+      driver-class-name: org.postgresql.Driver
+  jpa:
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      hibernate:
+        ddl-auto: update
+      show-sql: true
+  cloud:
+    function:
+      definition: registrarOrden # El nombre de la función que crearemos
+    stream:
+      bindings:
+        registrarOrden-in-0:
+          destination: exchange.ordenes.fanout # El mismo nombre que en el API
+          group: cola.journal # Esto crea una cola permanente para la DB
+      rabbit:
+        bindings:
+          registrarOrden-in-0:
+            consumer:
+              exchangeType: fanout

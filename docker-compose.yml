@@ -23,3 +23,23 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
+
+  db-journal:
+    image: postgres:alpine
+    container_name: postgres-journal
+    environment:
+      POSTGRES_DB: trading_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  journaler:
+    build: ./journaler
+    image: journaler-reto1:v1
+    depends_on:
+      - rabbitmq
+      - db-journal
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-journal:5432/trading_db
