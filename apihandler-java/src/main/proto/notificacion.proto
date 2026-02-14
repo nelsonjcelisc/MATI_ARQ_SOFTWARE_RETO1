@@ -16,7 +16,8 @@ message MatchRequest {
   int32 tipo = 4; // 1=Compra, 2=Venta
   // Campos de trazabilidad requeridos por el cliente Java
   int64 ts_engine_match = 5;
-  int64 ts_api_recepcion = 6;
+  int64 ts_api_salida = 6;
+  int64 ts_api_recepcion = 7;
 }
 
 message NotificacionResponse {

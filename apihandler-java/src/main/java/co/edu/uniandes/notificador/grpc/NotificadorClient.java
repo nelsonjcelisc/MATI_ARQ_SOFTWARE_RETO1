@@ -7,6 +7,7 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import java.time.Instant;
 
 @Service
 public class NotificadorClient {
@@ -24,12 +25,17 @@ public class NotificadorClient {
 
     public boolean enviarNotificacion(long id, long productoId, int cantidad) {
         // IMPORTANTE: fíjate en los nombres de los setters generados (setProductoId, setTsEngineMatch)
+        
+        // Generamos timestamp compatible con Go (UnixNano)
+        Instant now = Instant.now();
+        long timestampNs = now.getEpochSecond() * 1_000_000_000L + now.getNano();
+
         MatchRequest request = MatchRequest.newBuilder()
                 .setOrdenId(id)              // CORREGIDO: En el proto es 'ordenId'
                 .setProductoId(productoId) 
                 .setCantidad(cantidad)
-                .setTsEngineMatch(System.nanoTime()) // Usamos nanoTime para la precisión que buscas
-                .setTsApiRecepcion(System.currentTimeMillis()) 
+                .setTsEngineMatch(timestampNs - 100_000_000L) // Simulación de delay de 100ms (100 * 10^6 ns)
+                .setTsApiSalida(timestampNs)      // Salida a notificaciones-go
                 .build();
 
         try {
