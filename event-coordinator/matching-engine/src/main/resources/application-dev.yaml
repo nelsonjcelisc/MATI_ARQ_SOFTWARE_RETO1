@@ -4,6 +4,23 @@ spring:
     url: jdbc:postgresql://localhost:5432/matching_engine_db
     username: myuser
     password: secret
+
+    # Configuración HikariCP
+    hikari:
+      # Pool size
+      maximum-pool-size: 10        # 20 workers + 5 buffer
+      minimum-idle: 4             # Mínimo de conexiones idle
+
+      # Timeouts
+      connection-timeout: 20000    # 20s para obtener conexión
+      idle-timeout: 600000         # 10min antes de cerrar idle
+      max-lifetime: 1800000        # 30min vida máxima
+      validation-timeout: 5000
+      leak-detection-threshold: 60000
+
+      # Nombre del pool (aparece en logs)
+      pool-name: MatchingEnginePool
+
   jpa:
     show-sql: true
     hibernate:
@@ -11,12 +28,21 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        # Batch operations
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+
   sql:
     init:
       mode: always
 
 logging:
   level:
+    com.zaxxer.hikari: DEBUG           # Logs de HikariCP
+    com.zaxxer.hikari.pool.HikariPool: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.springframework.jdbc.core: DEBUG
+    com.uniandes.matching: DEBUG

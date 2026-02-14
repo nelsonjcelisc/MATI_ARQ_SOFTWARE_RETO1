@@ -22,6 +22,14 @@ public class OrderService {
     public Order createOrder(Order order) {
         order.initialize();
 
+        // ⚠️ SOLO PARA TESTING - Simula BD lenta
+//        try {
+//            Thread.sleep(200); // 200ms delay
+//        } catch (InterruptedException e) {
+//            Thread.currentThread().interrupt();
+//        }
+        // ⚠️ FIN TESTING
+
         log.info("Creating order: {} - Type: {} - Symbol: {}", order.getId(), order.getType(), order.getSymbol());
 
         if (order.getType() == OrderType.SALE) {
