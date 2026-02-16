@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package matching;
+
+service MatchingService {
+  rpc Match (MatchRequest) returns (MatchResponse);
+  rpc Health (HealthRequest) returns (HealthResponse);
+}
+
+message MatchRequest {
+  string requester = 1;
+}
+
+message MatchResponse {
+  string requestId = 1;
+  int32 simulatedLatencyMs = 2;
+  int64 serverTimeEpochMs = 3;
+  repeated Match matches = 4;
+}
+
+message Match {
+  string assetType = 1;
+  string symbol = 2;
+  string bidId = 3;
+  string offerId = 4;
+  double qty = 5;
+  double price = 6;
+}
+
+message HealthRequest {}
+message HealthResponse {
+  string status = 1;
+}

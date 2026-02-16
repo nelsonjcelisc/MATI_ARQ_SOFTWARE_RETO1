@@ -1,6 +1,3 @@
-¡Excelente! Como todo buen arquitecto, sabes que si no está documentado, no existe. Vamos a dejar el README.md impecable para que cuando tus profesores o compañeros lo vean, entiendan que no solo hiciste código, sino que diseñaste una infraestructura resiliente y escalable.
-
-Aquí tienes una estructura profesional que resume todas las batallas que ganamos hoy.
 
 📄 README.md: Reto 1 - Arquitectura de Microservicios
 🏗️ Descripción del Sistema

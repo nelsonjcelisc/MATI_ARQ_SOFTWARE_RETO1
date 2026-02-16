@@ -1,0 +1,24 @@
+{
+  "name": "mati---matching-engine",
+  "version": "1.0.0",
+  "description": "Simulación motor de emparejamiento para actividad de maestría en arquitectura de TI - Ejercicio Concurrencia",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "client": "ts-node-dev --transpile-only src/client/client.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.14.3",
+    "@grpc/proto-loader": "^0.8.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.3",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3"
+  }
+}

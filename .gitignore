@@ -1,0 +1,7 @@
+.vscode/
+
+# Dependency directories
+node_modules/
+
+matching-engine/node_modules/
+matching-engine/dist/
