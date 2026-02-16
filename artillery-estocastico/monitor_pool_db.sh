@@ -6,7 +6,7 @@ echo ""
 while true; do
     TIMESTAMP=$(date '+%H:%M:%S')
     
-    RESPONSE=$(curl -s http://localhost:8080/api/v1/monitoring/hikari)
+    RESPONSE=$(curl -s http://localhost:8081/api/v1/monitoring/hikari)
     
     ACTIVE=$(echo $RESPONSE | jq -r '.active')
     IDLE=$(echo $RESPONSE | jq -r '.idle')
