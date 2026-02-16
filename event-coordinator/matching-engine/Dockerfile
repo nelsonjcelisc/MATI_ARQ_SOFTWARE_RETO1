@@ -1,7 +1,7 @@
 # ==========================================
 # Etapa 1: BUILD (Maven + JDK 17)
 # ==========================================
-FROM --platform=linux/arm64 maven:3.9.6-eclipse-temurin-17 AS build
+FROM --platform=linux maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
 # Copiamos todo el contexto (pom.xml, src, etc.)
@@ -16,7 +16,7 @@ RUN mvn package -DskipTests
 # ==========================================
 # Etapa 2: RUNTIME (Amazon Corretto 17 Alpine ARM64)
 # ==========================================
-FROM --platform=linux/arm64 amazoncorretto:17-alpine-jdk
+FROM --platform=linux amazoncorretto:17-alpine-jdk
 WORKDIR /app
 
 # Copia el JAR generado desde la etapa de build
