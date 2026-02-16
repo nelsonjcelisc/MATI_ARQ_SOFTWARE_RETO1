@@ -1,10 +1,7 @@
 'use strict';
 
-const fs = require('fs');
-
-const dataset = JSON.parse(
-  fs.readFileSync('./dataset.json', 'utf8')
-);
+const SYMBOLS = ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', 'META', 'NVDA'];
+const ORDER_TYPES = ['SALE', 'BUY'];
 
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -60,15 +57,25 @@ module.exports = {
 
     if (!context.vars.forzarFinal && context.vars.oleadaRestante === 0) {
       const restante = context.vars.totalObjetivo - context.vars.totalEnviadas;
-      const tamOleada = randomInt(1, Math.min( context.vars.totalObjetivo , restante));
+      const tamOleada = randomInt(1, Math.min(50, restante));
       context.vars.oleadaRestante = tamOleada;
     }
+    
+    const orderType = ORDER_TYPES[randomInt(0, ORDER_TYPES.length - 1)];
+    const symbol = SYMBOLS[randomInt(0, SYMBOLS.length - 1)];
 
-    const data = dataset[randomInt(0, dataset.length - 1)];
+    context.vars.endpoint =
+      orderType === 'SALE'
+        ? '/api/v1/orders/sale'
+        : '/api/v1/orders/buy';
 
-    context.vars.tipo = data.tipo;
-    context.vars.cantidad = data.cantidad;
-    context.vars.usuario = data.usuario;
+    context.vars.payload = {
+      symbol: symbol,
+      quantity: randomInt(1, 500),
+      price: (Math.random() * 300 + 50).toFixed(2),
+      type: orderType,
+      userId: `user-${randomInt(1, 10000)}`
+    };
 
     context.vars.totalEnviadas++;
     context.vars.oleadaRestante--;
