@@ -1,5 +1,5 @@
 config:
-  target: "http://localhost:8080"
+  target: "http://matching-engine:8080"
   phases:
     - duration: 60
       arrivalCount: 1
