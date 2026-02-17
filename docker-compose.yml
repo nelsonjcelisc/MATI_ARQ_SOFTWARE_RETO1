@@ -106,10 +106,13 @@ services:
       - SPRING_DATASOURCE_PASSWORD=secret
       - 'grpc.client.notificaciones.address=static://notificaciones:50051'
       - 'grpc.client.notificaciones.negotiationType=PLAINTEXT'
+      - 'grpc.client.matching-engine-node.address=static://matching-engine-node:50051'
+      - 'grpc.client.matching-engine-node.negotiationType=PLAINTEXT'
     networks:
       - bolsa-net
     depends_on:
       - notificaciones 
+      - matching-engine-node
       - postgres
 
   postgres:

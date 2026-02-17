@@ -62,3 +62,12 @@ workers:
     buys:
       count: 12
       queue-capacity: 1000
+
+grpc:
+  client:
+    notificaciones:
+      address: static://notificaciones:50051
+      negotiationType: PLAINTEXT
+    matching-engine-node:
+      address: static://matching-engine-node:50051
+      negotiationType: PLAINTEXT
