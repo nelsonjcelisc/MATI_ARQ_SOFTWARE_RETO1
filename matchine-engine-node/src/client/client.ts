@@ -21,7 +21,7 @@ const proto = grpc.loadPackageDefinition(packageDef) as any;
 const matchingPkg = proto.matching;
 
 function main() {
-  const target = process.env.TARGET || "localhost:50051";
+  const target = process.env.TARGET || "localhost:50052";
   const client = new matchingPkg.MatchingService(
     target,
     grpc.credentials.createInsecure()

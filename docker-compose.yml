@@ -58,6 +58,15 @@ services:
   #     - SPRING_DATA_MONGODB_URI=mongodb://db-journal:27017/trading_db
   #     #- SPRING_DATASOURCE_URL=jdbc:postgresql://db-journal:5432/trading_db
 
+  matching-engine-node:
+    build: ./matchine-engine-node
+    container_name: matching-engine-node
+    ports:
+      - "50052:50051"
+    networks:
+      - bolsa-net
+
+
   notificaciones:
     build: ./notificaciones-go
     container_name: notificador_mati
