@@ -72,6 +72,7 @@ services:
     container_name: notificador_mati
     ports:
       - "50051:50051"
+      - "2112:2112"
     deploy:
       resources:
         limits:
@@ -99,7 +100,7 @@ services:
       dockerfile: Dockerfile
     container_name: matching-engine
     ports:
-      - "8081:8080"
+      - "8080:8080"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/matching_engine_db
       - SPRING_DATASOURCE_USERNAME=myuser
