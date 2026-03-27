@@ -1,0 +1,71 @@
+spring:
+  application:
+    name: ventas-api
+  profiles:
+    active: dev
+  #Redis
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      connect-timeout: 2000ms
+      timeout: 1000ms
+server:
+  port: 8080
+  servlet:
+    context-path: /ventas-api
+  tomcat:
+    threads:
+      max: 50
+      min-spare: 10
+
+    accept-count: 100
+    max-connections: 10000
+    connection-timeout: 20000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        #include: health,metrics,prometheus,info,threaddump
+        include: "*"
+      #base-path: /actuator
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "orden.tiempo.total": true
+      percentiles:
+        "orden_tiempo_total": 0.95
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enable: true
+
+ # metrics:
+ #   export:
+  #    prometheus:
+  #      enabled: true
+  #management.endpoints.web.exposure.include=*
+  #management.endpoint.metrics.enabled=true
+  #management.metrics.distribution.percentiles-histogram.orden.tiempo.total=true
+  #management.metrics.distribution.percentiles.orden_tiempo_total=0.95
+
+logging:
+  level:
+    root: INFO
+    com.uniandes.ventas: DEBUG
+    org:
+      springframework:
+        web:
+          servlet:
+            mvc:
+              method:
+                annotation:
+                  ExceptionHandlerExceptionResolver: ERROR
+  file:
+    name: logs/ventas-api.log
+  pattern:
+    #console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
