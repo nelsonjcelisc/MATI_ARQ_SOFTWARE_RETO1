@@ -1,27 +1,27 @@
-2026-03-26 22:16:53 [restartedMain] INFO  c.u.ventas.VentasApiApplication - Starting VentasApiApplication using Java 17.0.18 with PID 7048 (D:\Desarrollo\WorkspaceArqSoft\CodeBase\MATI_ARQ_SOFTWARE_RETO1\ventas-api\target\classes started by Omar in D:\Desarrollo\WorkspaceArqSoft\CodeBase\MATI_ARQ_SOFTWARE_RETO1\ventas-api)
-2026-03-26 22:16:53 [restartedMain] DEBUG c.u.ventas.VentasApiApplication - Running with Spring Boot v4.0.4, Spring v7.0.6
-2026-03-26 22:16:53 [restartedMain] INFO  c.u.ventas.VentasApiApplication - The following 1 profile is active: "dev"
-2026-03-26 22:16:53 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-03-26 22:16:53 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-03-26 22:16:54 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2026-03-26 22:16:54 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-03-26 22:16:54 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 134 ms. Found 1 JPA repository interface.
-2026-03-26 22:16:54 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2026-03-26 22:16:54 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2026-03-26 22:16:54 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.uniandes.ventas.persistence.crud.CrudOrdenCompraEntity; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2026-03-26 22:16:54 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
-2026-03-26 22:16:55 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
-2026-03-26 22:16:55 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-03-26 22:16:55 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
-2026-03-26 22:16:55 [restartedMain] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1814 ms
-2026-03-26 22:16:55 [restartedMain] DEBUG c.u.v.web.filter.IdempotenciaFilter - Filter 'idempotenciaFilter' configured for use
-2026-03-26 22:16:55 [restartedMain] INFO  org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-03-26 22:16:55 [restartedMain] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.7.Final
-2026-03-26 22:16:55 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-03-26 22:16:56 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-03-26 22:16:56 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2e27b61c
-2026-03-26 22:16:56 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-03-26 22:16:56 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+2026-04-01 18:28:58 [restartedMain] INFO  c.u.ventas.VentasApiApplication - Starting VentasApiApplication using Java 17.0.18 with PID 20568 (D:\Desarrollo\WorkspaceArqSoft\CodeBase\MATI_ARQ_SOFTWARE_RETO1\ventas-api\target\classes started by Omar in D:\Desarrollo\WorkspaceArqSoft\CodeBase\MATI_ARQ_SOFTWARE_RETO1\ventas-api)
+2026-04-01 18:28:58 [restartedMain] DEBUG c.u.ventas.VentasApiApplication - Running with Spring Boot v4.0.4, Spring v7.0.6
+2026-04-01 18:28:58 [restartedMain] INFO  c.u.ventas.VentasApiApplication - The following 1 profile is active: "dev"
+2026-04-01 18:28:59 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-01 18:28:59 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-01 18:28:59 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-01 18:28:59 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-01 18:29:00 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 138 ms. Found 1 JPA repository interface.
+2026-04-01 18:29:00 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-01 18:29:00 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-04-01 18:29:00 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.uniandes.ventas.persistence.crud.CrudOrdenCompraEntity; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-04-01 18:29:00 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 11 ms. Found 0 Redis repository interfaces.
+2026-04-01 18:29:00 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-04-01 18:29:00 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-01 18:29:00 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-04-01 18:29:00 [restartedMain] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1976 ms
+2026-04-01 18:29:01 [restartedMain] DEBUG c.u.v.web.filter.IdempotenciaFilter - Filter 'idempotenciaFilter' configured for use
+2026-04-01 18:29:01 [restartedMain] INFO  org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-01 18:29:01 [restartedMain] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-01 18:29:02 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-01 18:29:02 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-01 18:29:02 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@58ad1e45
+2026-04-01 18:29:02 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-01 18:29:02 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
 	Database JDBC URL [jdbc:postgresql://localhost:5432/ventas-api-db?sslmode=disable&currentSchema=public]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
@@ -33,46 +33,46 @@
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-03-26 22:16:57 [restartedMain] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-03-26 22:16:57 [restartedMain] INFO  org.hibernate.orm.jdbc.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 20)
-2026-03-26 22:16:57 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-03-26 22:16:57 [restartedMain] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-03-26 22:16:58 [restartedMain] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-03-26 22:16:58 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2026-03-26 22:16:58 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/ventas-api'
-2026-03-26 22:16:58 [restartedMain] INFO  c.u.ventas.VentasApiApplication - Started VentasApiApplication in 6.135 seconds (process running for 6.92)
-2026-03-26 22:16:59 [RMI TCP Connection(1)-192.168.5.107] INFO  o.a.c.c.C.[.[.[/ventas-api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-03-26 22:16:59 [RMI TCP Connection(1)-192.168.5.107] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-03-26 22:16:59 [RMI TCP Connection(1)-192.168.5.107] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-2026-03-26 22:18:01 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
-2026-03-26 22:18:02 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
-2026-03-26 22:18:02 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-03-26 22:18:02 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-03-26 22:18:02 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2026-03-26 22:18:41 [restartedMain] INFO  c.u.ventas.VentasApiApplication - Starting VentasApiApplication using Java 17.0.18 with PID 6500 (D:\Desarrollo\WorkspaceArqSoft\CodeBase\MATI_ARQ_SOFTWARE_RETO1\ventas-api\target\classes started by Omar in D:\Desarrollo\WorkspaceArqSoft\CodeBase\MATI_ARQ_SOFTWARE_RETO1\ventas-api)
-2026-03-26 22:18:41 [restartedMain] DEBUG c.u.ventas.VentasApiApplication - Running with Spring Boot v4.0.4, Spring v7.0.6
-2026-03-26 22:18:41 [restartedMain] INFO  c.u.ventas.VentasApiApplication - The following 1 profile is active: "dev"
-2026-03-26 22:18:41 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-03-26 22:18:41 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-03-26 22:18:42 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2026-03-26 22:18:42 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-03-26 22:18:42 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 156 ms. Found 1 JPA repository interface.
-2026-03-26 22:18:42 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2026-03-26 22:18:42 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2026-03-26 22:18:42 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.uniandes.ventas.persistence.crud.CrudOrdenCompraEntity; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2026-03-26 22:18:42 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
-2026-03-26 22:18:43 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
-2026-03-26 22:18:43 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-03-26 22:18:43 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
-2026-03-26 22:18:43 [restartedMain] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1729 ms
-2026-03-26 22:18:43 [restartedMain] DEBUG c.u.v.web.filter.IdempotenciaFilter - Filter 'idempotenciaFilter' configured for use
-2026-03-26 22:18:43 [restartedMain] INFO  org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-03-26 22:18:43 [restartedMain] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.7.Final
-2026-03-26 22:18:44 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-03-26 22:18:44 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-03-26 22:18:44 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6362406b
-2026-03-26 22:18:44 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-03-26 22:18:44 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+2026-04-01 18:29:03 [restartedMain] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-01 18:29:03 [restartedMain] INFO  org.hibernate.orm.jdbc.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 20)
+2026-04-01 18:29:03 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-01 18:29:04 [restartedMain] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-01 18:29:04 [restartedMain] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-01 18:29:05 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
+2026-04-01 18:29:05 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/ventas-api'
+2026-04-01 18:29:05 [restartedMain] INFO  c.u.ventas.VentasApiApplication - Started VentasApiApplication in 7.121 seconds (process running for 9.206)
+2026-04-01 18:29:05 [RMI TCP Connection(2)-192.168.5.107] INFO  o.a.c.c.C.[.[.[/ventas-api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-01 18:29:05 [RMI TCP Connection(2)-192.168.5.107] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-01 18:29:05 [RMI TCP Connection(2)-192.168.5.107] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-04-01 18:32:16 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-01 18:32:16 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-04-01 18:32:16 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-01 18:32:16 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-01 18:32:16 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-01 18:38:59 [restartedMain] INFO  c.u.ventas.VentasApiApplication - Starting VentasApiApplication using Java 17.0.18 with PID 16516 (D:\Desarrollo\WorkspaceArqSoft\CodeBase\MATI_ARQ_SOFTWARE_RETO1\ventas-api\target\classes started by Omar in D:\Desarrollo\WorkspaceArqSoft\CodeBase\MATI_ARQ_SOFTWARE_RETO1\ventas-api)
+2026-04-01 18:38:59 [restartedMain] DEBUG c.u.ventas.VentasApiApplication - Running with Spring Boot v4.0.4, Spring v7.0.6
+2026-04-01 18:38:59 [restartedMain] INFO  c.u.ventas.VentasApiApplication - The following 1 profile is active: "dev"
+2026-04-01 18:38:59 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-01 18:38:59 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-01 18:38:59 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-01 18:38:59 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-01 18:39:00 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 126 ms. Found 1 JPA repository interface.
+2026-04-01 18:39:00 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-01 18:39:00 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-04-01 18:39:00 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.uniandes.ventas.persistence.crud.CrudOrdenCompraEntity; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-04-01 18:39:00 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2026-04-01 18:39:00 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-04-01 18:39:00 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-01 18:39:00 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-04-01 18:39:00 [restartedMain] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1680 ms
+2026-04-01 18:39:00 [restartedMain] DEBUG c.u.v.web.filter.IdempotenciaFilter - Filter 'idempotenciaFilter' configured for use
+2026-04-01 18:39:01 [restartedMain] INFO  org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-01 18:39:01 [restartedMain] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-01 18:39:01 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-01 18:39:01 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-01 18:39:01 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@122f0980
+2026-04-01 18:39:01 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-01 18:39:01 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
 	Database JDBC URL [jdbc:postgresql://localhost:5432/ventas-api-db?sslmode=disable&currentSchema=public]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
@@ -84,298 +84,19 @@
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-03-26 22:18:45 [restartedMain] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-03-26 22:18:45 [restartedMain] INFO  org.hibernate.orm.jdbc.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 20)
-2026-03-26 22:18:45 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-03-26 22:18:46 [restartedMain] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-03-26 22:18:46 [restartedMain] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-03-26 22:18:46 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2026-03-26 22:18:47 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/ventas-api'
-2026-03-26 22:18:47 [restartedMain] INFO  c.u.ventas.VentasApiApplication - Started VentasApiApplication in 5.809 seconds (process running for 6.563)
-2026-03-26 22:18:47 [RMI TCP Connection(2)-192.168.5.107] INFO  o.a.c.c.C.[.[.[/ventas-api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-03-26 22:18:47 [RMI TCP Connection(2)-192.168.5.107] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-03-26 22:18:47 [RMI TCP Connection(2)-192.168.5.107] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-2026-03-26 22:21:36 [http-nio-8080-exec-14] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:21:36 [http-nio-8080-exec-12] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:21:36 [http-nio-8080-exec-16] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:21:36 [http-nio-8080-exec-1] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:21:36 [http-nio-8080-exec-11] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:21:36 [http-nio-8080-exec-5] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:21:36 [http-nio-8080-exec-14] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:21:36 [http-nio-8080-exec-1] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 9123657c-191f-4ba1-b7d8-42f3dfd454cc
-2026-03-26 22:21:36 [http-nio-8080-exec-11] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 9123657c-191f-4ba1-b7d8-42f3dfd454cc
-2026-03-26 22:21:36 [http-nio-8080-exec-5] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: b60824a4-f841-4057-a498-5f35219dbd5c
-2026-03-26 22:21:37 [http-nio-8080-exec-17] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:21:37 [http-nio-8080-exec-2] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 47d2188b-634a-4e5f-8a30-9791efe694d8
-2026-03-26 22:21:37 [http-nio-8080-exec-20] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: d0bc7d5b-0ab8-48ba-92da-5678c0f63264
-2026-03-26 22:21:37 [http-nio-8080-exec-6] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:21:37 [http-nio-8080-exec-3] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:21:37 [http-nio-8080-exec-4] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 9123657c-191f-4ba1-b7d8-42f3dfd454cc
-2026-03-26 22:21:37 [http-nio-8080-exec-15] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: dd6f1608-d3f6-488f-80df-92a53e895c8d
-2026-03-26 22:21:37 [http-nio-8080-exec-18] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 309f890f-7e59-49ec-93e5-ccbcd432ec24
-2026-03-26 22:21:37 [http-nio-8080-exec-19] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 98cfd5f4-0955-43c0-abb5-272a4a30231a
-2026-03-26 22:21:37 [http-nio-8080-exec-1] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 40e1216f-5d71-4b85-8685-3d406e575c59
-2026-03-26 22:21:37 [http-nio-8080-exec-16] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 6a96d04d-6079-44cf-a204-ad98fe053dcf
-2026-03-26 22:21:37 [http-nio-8080-exec-11] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: c57647da-5ed5-4f76-b164-4cd7d00d35b9
-2026-03-26 22:21:37 [http-nio-8080-exec-5] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: bbf2cfe7-8e47-4017-ae73-71e8e40bf1e1
-2026-03-26 22:21:37 [http-nio-8080-exec-20] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 30a998f5-001c-4a3b-af82-9c84512a6e97
-2026-03-26 22:21:37 [http-nio-8080-exec-6] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 47d2188b-634a-4e5f-8a30-9791efe694d8
-2026-03-26 22:21:37 [http-nio-8080-exec-3] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: b60824a4-f841-4057-a498-5f35219dbd5c
-2026-03-26 22:21:37 [http-nio-8080-exec-15] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 309f890f-7e59-49ec-93e5-ccbcd432ec24
-2026-03-26 22:21:37 [http-nio-8080-exec-18] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: d0bc7d5b-0ab8-48ba-92da-5678c0f63264
-2026-03-26 22:21:37 [http-nio-8080-exec-19] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:21:37 [http-nio-8080-exec-10] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 9123657c-191f-4ba1-b7d8-42f3dfd454cc
-2026-03-26 22:21:37 [http-nio-8080-exec-7] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: b60824a4-f841-4057-a498-5f35219dbd5c
-2026-03-26 22:21:37 [http-nio-8080-exec-14] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:21:37 [http-nio-8080-exec-12] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 30a998f5-001c-4a3b-af82-9c84512a6e97
-2026-03-26 22:21:37 [http-nio-8080-exec-11] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:21:37 [http-nio-8080-exec-17] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 98cfd5f4-0955-43c0-abb5-272a4a30231a
-2026-03-26 22:21:37 [http-nio-8080-exec-2] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 47d2188b-634a-4e5f-8a30-9791efe694d8
-2026-03-26 22:21:37 [http-nio-8080-exec-18] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 309f890f-7e59-49ec-93e5-ccbcd432ec24
-2026-03-26 22:21:37 [http-nio-8080-exec-4] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 40e1216f-5d71-4b85-8685-3d406e575c59
-2026-03-26 22:21:37 [http-nio-8080-exec-10] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: b60824a4-f841-4057-a498-5f35219dbd5c
-2026-03-26 22:21:37 [http-nio-8080-exec-14] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:21:37 [http-nio-8080-exec-13] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:21:37 [http-nio-8080-exec-12] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 309f890f-7e59-49ec-93e5-ccbcd432ec24
-2026-03-26 22:21:37 [http-nio-8080-exec-1] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:21:37 [http-nio-8080-exec-5] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 5cf1e8d4-e4b7-4810-97a3-14a16295b087
-2026-03-26 22:21:37 [http-nio-8080-exec-17] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:21:37 [http-nio-8080-exec-15] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 54f4be41-d6b7-47e4-838c-b505146d5fdd
-2026-03-26 22:21:37 [http-nio-8080-exec-3] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:21:37 [http-nio-8080-exec-18] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 40e1216f-5d71-4b85-8685-3d406e575c59
-2026-03-26 22:21:37 [http-nio-8080-exec-19] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: d0bc7d5b-0ab8-48ba-92da-5678c0f63264
-2026-03-26 22:21:37 [http-nio-8080-exec-9] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:21:37 [http-nio-8080-exec-14] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 76dcf67e-e8ed-4709-b8e8-baf236cca0da
-2026-03-26 22:21:37 [http-nio-8080-exec-7] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:48 [http-nio-8080-exec-30] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:48 [http-nio-8080-exec-26] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:25:48 [http-nio-8080-exec-24] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:48 [http-nio-8080-exec-27] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:48 [http-nio-8080-exec-1] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:25:48 [http-nio-8080-exec-29] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:25:48 [http-nio-8080-exec-12] WARN  org.hibernate.orm.jdbc.error - HHH000247: ErrorCode: 0, SQLState: 23505
-2026-03-26 22:25:48 [http-nio-8080-exec-13] WARN  org.hibernate.orm.jdbc.error - HHH000247: ErrorCode: 0, SQLState: 23505
-2026-03-26 22:25:48 [http-nio-8080-exec-12] WARN  org.hibernate.orm.jdbc.error - ERROR: duplicate key value violates unique constraint "uk3u5n36r29cdm755prmknuip9g"
-  Detail: Key (id_factura)=(FACTURA-REPETIDA-002) already exists.
-2026-03-26 22:25:48 [http-nio-8080-exec-13] WARN  org.hibernate.orm.jdbc.error - ERROR: duplicate key value violates unique constraint "uk3u5n36r29cdm755prmknuip9g"
-  Detail: Key (id_factura)=(FACTURA-REPETIDA-002) already exists.
-2026-03-26 22:25:48 [http-nio-8080-exec-12] INFO  c.u.v.d.e.VentasExceptionHandler - Exception Detection DataIntegrityViolationException
-2026-03-26 22:25:48 [http-nio-8080-exec-13] INFO  c.u.v.d.e.VentasExceptionHandler - Exception Detection DataIntegrityViolationException
-2026-03-26 22:25:48 [http-nio-8080-exec-21] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 13914d29-6272-4d29-95a0-8ca95ecd2efa
-2026-03-26 22:25:48 [http-nio-8080-exec-9] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:25:48 [http-nio-8080-exec-5] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: eb641d77-51e6-424a-9f4d-08eca2b4a1fd
-2026-03-26 22:25:48 [http-nio-8080-exec-15] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:25:48 [http-nio-8080-exec-24] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:49 [http-nio-8080-exec-26] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:49 [http-nio-8080-exec-27] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:49 [http-nio-8080-exec-30] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:49 [http-nio-8080-exec-22] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:49 [http-nio-8080-exec-20] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 62f7f2a4-4e5e-4667-a1cd-8bffdf188165
-2026-03-26 22:25:49 [http-nio-8080-exec-25] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:25:49 [http-nio-8080-exec-29] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: f870a7e9-1d34-49a3-a54f-b8bf2b94e99f
-2026-03-26 22:25:49 [http-nio-8080-exec-8] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:25:49 [http-nio-8080-exec-23] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: bc358bb9-aed7-48b2-a1e1-3d3dbb83a111
-2026-03-26 22:25:49 [http-nio-8080-exec-13] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 6e5e9053-5a3b-4f25-b231-696123f3e60f
-2026-03-26 22:25:49 [http-nio-8080-exec-21] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 62f7f2a4-4e5e-4667-a1cd-8bffdf188165
-2026-03-26 22:25:49 [http-nio-8080-exec-12] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:25:49 [http-nio-8080-exec-18] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: eb641d77-51e6-424a-9f4d-08eca2b4a1fd
-2026-03-26 22:25:49 [http-nio-8080-exec-5] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:25:49 [http-nio-8080-exec-24] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:49 [http-nio-8080-exec-27] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:49 [http-nio-8080-exec-30] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:49 [http-nio-8080-exec-20] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 16c15a45-b03a-41d7-a9c1-0e86df32ff28
-2026-03-26 22:25:49 [http-nio-8080-exec-22] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:25:49 [http-nio-8080-exec-28] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:49 [http-nio-8080-exec-1] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 16c15a45-b03a-41d7-a9c1-0e86df32ff28
-2026-03-26 22:25:49 [http-nio-8080-exec-16] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 6e5e9053-5a3b-4f25-b231-696123f3e60f
-2026-03-26 22:25:49 [http-nio-8080-exec-13] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:25:49 [http-nio-8080-exec-18] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 16c15a45-b03a-41d7-a9c1-0e86df32ff28
-2026-03-26 22:25:49 [http-nio-8080-exec-9] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:25:49 [http-nio-8080-exec-24] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:49 [http-nio-8080-exec-15] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:49 [http-nio-8080-exec-26] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:25:49 [http-nio-8080-exec-27] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:25:49 [http-nio-8080-exec-22] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:25:49 [http-nio-8080-exec-1] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 62f7f2a4-4e5e-4667-a1cd-8bffdf188165
-2026-03-26 22:25:49 [http-nio-8080-exec-29] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:49 [http-nio-8080-exec-8] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:49 [http-nio-8080-exec-21] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:49 [http-nio-8080-exec-12] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 2d6883b1-c01a-46de-936f-7940506ee838
-2026-03-26 22:25:49 [http-nio-8080-exec-9] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:49 [http-nio-8080-exec-5] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: f870a7e9-1d34-49a3-a54f-b8bf2b94e99f
-2026-03-26 22:25:49 [http-nio-8080-exec-24] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:49 [http-nio-8080-exec-26] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:25:49 [http-nio-8080-exec-27] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: f870a7e9-1d34-49a3-a54f-b8bf2b94e99f
-2026-03-26 22:25:49 [http-nio-8080-exec-20] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:25:49 [http-nio-8080-exec-30] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: eb641d77-51e6-424a-9f4d-08eca2b4a1fd
-2026-03-26 22:25:49 [http-nio-8080-exec-1] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 9663e04c-46b7-4eb2-8185-c46d79314d4d
-2026-03-26 22:25:49 [http-nio-8080-exec-25] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:25:49 [http-nio-8080-exec-28] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 6d2934c7-15a5-45c9-be74-c345d826ea5a
-2026-03-26 22:25:49 [http-nio-8080-exec-29] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:26:27 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
-2026-03-26 22:26:27 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
-2026-03-26 22:26:27 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-03-26 22:26:27 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-03-26 22:26:27 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2026-03-26 22:26:43 [restartedMain] INFO  c.u.ventas.VentasApiApplication - Starting VentasApiApplication using Java 17.0.18 with PID 18724 (D:\Desarrollo\WorkspaceArqSoft\CodeBase\MATI_ARQ_SOFTWARE_RETO1\ventas-api\target\classes started by Omar in D:\Desarrollo\WorkspaceArqSoft\CodeBase\MATI_ARQ_SOFTWARE_RETO1\ventas-api)
-2026-03-26 22:26:43 [restartedMain] DEBUG c.u.ventas.VentasApiApplication - Running with Spring Boot v4.0.4, Spring v7.0.6
-2026-03-26 22:26:43 [restartedMain] INFO  c.u.ventas.VentasApiApplication - The following 1 profile is active: "dev"
-2026-03-26 22:26:43 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-03-26 22:26:43 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-03-26 22:26:43 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2026-03-26 22:26:43 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-03-26 22:26:44 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 131 ms. Found 1 JPA repository interface.
-2026-03-26 22:26:44 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2026-03-26 22:26:44 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2026-03-26 22:26:44 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.uniandes.ventas.persistence.crud.CrudOrdenCompraEntity; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2026-03-26 22:26:44 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
-2026-03-26 22:26:44 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
-2026-03-26 22:26:44 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-03-26 22:26:44 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
-2026-03-26 22:26:44 [restartedMain] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1785 ms
-2026-03-26 22:26:45 [restartedMain] DEBUG c.u.v.web.filter.IdempotenciaFilter - Filter 'idempotenciaFilter' configured for use
-2026-03-26 22:26:45 [restartedMain] INFO  org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-03-26 22:26:45 [restartedMain] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.7.Final
-2026-03-26 22:26:45 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-03-26 22:26:45 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-03-26 22:26:45 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@346c4b1a
-2026-03-26 22:26:45 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-03-26 22:26:45 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://localhost:5432/ventas-api-db?sslmode=disable&currentSchema=public]
-	Database driver: PostgreSQL JDBC Driver
-	Database dialect: PostgreSQLDialect
-	Database version: 16.13
-	Default catalog/schema: ventas-api-db/public
-	Autocommit mode: undefined/unknown
-	Isolation level: READ_COMMITTED [default READ_COMMITTED]
-	JDBC fetch size: none
-	Pool: DataSourceConnectionProvider
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-03-26 22:26:47 [restartedMain] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-03-26 22:26:47 [restartedMain] INFO  org.hibernate.orm.jdbc.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 20)
-2026-03-26 22:26:47 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-03-26 22:26:47 [restartedMain] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-03-26 22:26:47 [restartedMain] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-03-26 22:26:48 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2026-03-26 22:26:48 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/ventas-api'
-2026-03-26 22:26:48 [restartedMain] INFO  c.u.ventas.VentasApiApplication - Started VentasApiApplication in 5.895 seconds (process running for 6.762)
-2026-03-26 22:26:49 [RMI TCP Connection(2)-192.168.5.107] INFO  o.a.c.c.C.[.[.[/ventas-api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-03-26 22:26:49 [RMI TCP Connection(2)-192.168.5.107] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-03-26 22:26:49 [RMI TCP Connection(2)-192.168.5.107] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-2026-03-26 22:27:02 [http-nio-8080-exec-5] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: f47ac10b-58cc-4372-a567-0e02b2c3d477
-2026-03-26 22:27:03 [http-nio-8080-exec-4] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: f47ac10b-58cc-4372-a567-0e02b2c3d477
-2026-03-26 22:27:04 [http-nio-8080-exec-9] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: f47ac10b-58cc-4372-a567-0e02b2c3d477
-2026-03-26 22:27:05 [http-nio-8080-exec-8] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: f47ac10b-58cc-4372-a567-0e02b2c3d477
-2026-03-26 22:27:05 [http-nio-8080-exec-7] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: f47ac10b-58cc-4372-a567-0e02b2c3d477
-2026-03-26 22:27:06 [http-nio-8080-exec-10] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: f47ac10b-58cc-4372-a567-0e02b2c3d477
-2026-03-26 22:27:07 [http-nio-8080-exec-1] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: f47ac10b-58cc-4372-a567-0e02b2c3d477
-2026-03-26 22:27:08 [http-nio-8080-exec-2] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: f47ac10b-58cc-4372-a567-0e02b2c3d477
-2026-03-26 22:27:08 [http-nio-8080-exec-3] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: f47ac10b-58cc-4372-a567-0e02b2c3d477
-2026-03-26 22:27:09 [http-nio-8080-exec-6] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: f47ac10b-58cc-4372-a567-0e02b2c3d477
-2026-03-26 22:27:10 [http-nio-8080-exec-5] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: f47ac10b-58cc-4372-a567-0e02b2c3d477
-2026-03-26 22:30:19 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
-2026-03-26 22:30:20 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
-2026-03-26 22:30:20 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-03-26 22:30:20 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-03-26 22:30:20 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2026-03-26 22:31:38 [restartedMain] INFO  c.u.ventas.VentasApiApplication - Starting VentasApiApplication using Java 17.0.18 with PID 7796 (D:\Desarrollo\WorkspaceArqSoft\CodeBase\MATI_ARQ_SOFTWARE_RETO1\ventas-api\target\classes started by Omar in D:\Desarrollo\WorkspaceArqSoft\CodeBase\MATI_ARQ_SOFTWARE_RETO1\ventas-api)
-2026-03-26 22:31:38 [restartedMain] DEBUG c.u.ventas.VentasApiApplication - Running with Spring Boot v4.0.4, Spring v7.0.6
-2026-03-26 22:31:38 [restartedMain] INFO  c.u.ventas.VentasApiApplication - The following 1 profile is active: "dev"
-2026-03-26 22:31:38 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-03-26 22:31:38 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-03-26 22:31:39 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2026-03-26 22:31:39 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-03-26 22:31:39 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 132 ms. Found 1 JPA repository interface.
-2026-03-26 22:31:39 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2026-03-26 22:31:39 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2026-03-26 22:31:39 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.uniandes.ventas.persistence.crud.CrudOrdenCompraEntity; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2026-03-26 22:31:39 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
-2026-03-26 22:31:40 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
-2026-03-26 22:31:40 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-03-26 22:31:40 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
-2026-03-26 22:31:40 [restartedMain] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1682 ms
-2026-03-26 22:31:40 [restartedMain] DEBUG c.u.v.web.filter.IdempotenciaFilter - Filter 'idempotenciaFilter' configured for use
-2026-03-26 22:31:40 [restartedMain] INFO  org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-03-26 22:31:40 [restartedMain] INFO  org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.7.Final
-2026-03-26 22:31:41 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-03-26 22:31:41 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-03-26 22:31:41 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1e5cc082
-2026-03-26 22:31:41 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-03-26 22:31:41 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
-	Database JDBC URL [jdbc:postgresql://localhost:5432/ventas-api-db?sslmode=disable&currentSchema=public]
-	Database driver: PostgreSQL JDBC Driver
-	Database dialect: PostgreSQLDialect
-	Database version: 16.13
-	Default catalog/schema: ventas-api-db/public
-	Autocommit mode: undefined/unknown
-	Isolation level: READ_COMMITTED [default READ_COMMITTED]
-	JDBC fetch size: none
-	Pool: DataSourceConnectionProvider
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-03-26 22:31:42 [restartedMain] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-03-26 22:31:42 [restartedMain] INFO  org.hibernate.orm.jdbc.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 20)
-2026-03-26 22:31:42 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-03-26 22:31:43 [restartedMain] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-03-26 22:31:43 [restartedMain] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-03-26 22:31:44 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
-2026-03-26 22:31:44 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/ventas-api'
-2026-03-26 22:31:44 [restartedMain] INFO  c.u.ventas.VentasApiApplication - Started VentasApiApplication in 5.704 seconds (process running for 6.455)
-2026-03-26 22:31:44 [RMI TCP Connection(2)-192.168.5.107] INFO  o.a.c.c.C.[.[.[/ventas-api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-03-26 22:31:44 [RMI TCP Connection(2)-192.168.5.107] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-03-26 22:31:44 [RMI TCP Connection(2)-192.168.5.107] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-2026-03-26 22:31:49 [http-nio-8080-exec-6] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:31:49 [http-nio-8080-exec-20] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:31:49 [http-nio-8080-exec-16] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:31:49 [http-nio-8080-exec-15] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:31:49 [http-nio-8080-exec-14] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:31:49 [http-nio-8080-exec-5] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:31:49 [http-nio-8080-exec-16] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:31:49 [http-nio-8080-exec-20] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:31:49 [http-nio-8080-exec-18] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:31:49 [http-nio-8080-exec-21] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:31:49 [http-nio-8080-exec-17] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 874b0bb6-82e6-4f80-853e-e0c1010ebebb
-2026-03-26 22:31:49 [http-nio-8080-exec-12] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:31:49 [http-nio-8080-exec-1] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:31:49 [http-nio-8080-exec-15] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: fc6dae32-b495-4c82-8970-86efdf0f1852
-2026-03-26 22:31:49 [http-nio-8080-exec-14] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: caf1cac3-23ed-4ea5-9c14-1993e95870e5
-2026-03-26 22:31:49 [http-nio-8080-exec-8] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:31:49 [http-nio-8080-exec-21] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: b5c00495-a0f4-4c53-b932-b03b49f8cf04
-2026-03-26 22:31:49 [http-nio-8080-exec-16] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:31:49 [http-nio-8080-exec-12] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:31:49 [http-nio-8080-exec-17] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 874b0bb6-82e6-4f80-853e-e0c1010ebebb
-2026-03-26 22:31:49 [http-nio-8080-exec-14] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: caf1cac3-23ed-4ea5-9c14-1993e95870e5
-2026-03-26 22:31:49 [http-nio-8080-exec-6] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:31:49 [http-nio-8080-exec-3] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: fc6dae32-b495-4c82-8970-86efdf0f1852
-2026-03-26 22:31:49 [http-nio-8080-exec-8] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: c644fc35-80ec-4239-8fd5-eb27b2526943
-2026-03-26 22:31:49 [http-nio-8080-exec-10] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:31:49 [http-nio-8080-exec-15] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:31:49 [http-nio-8080-exec-16] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 18adf3fd-8763-4566-9130-21435a196a86
-2026-03-26 22:31:49 [http-nio-8080-exec-4] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: f8da2e7a-ac92-4cc7-a162-392c177c0491
-2026-03-26 22:31:49 [http-nio-8080-exec-20] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:31:49 [http-nio-8080-exec-18] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 3c1dc842-4cf3-4e43-9ca0-2adfe170c160
-2026-03-26 22:31:49 [http-nio-8080-exec-17] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 056f3c4e-f524-4d90-92b1-6652388ef37d
-2026-03-26 22:31:49 [http-nio-8080-exec-5] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:31:49 [http-nio-8080-exec-14] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: fc6dae32-b495-4c82-8970-86efdf0f1852
-2026-03-26 22:31:49 [http-nio-8080-exec-13] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: c644fc35-80ec-4239-8fd5-eb27b2526943
-2026-03-26 22:31:49 [http-nio-8080-exec-6] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-001
-2026-03-26 22:31:49 [http-nio-8080-exec-8] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: b5c00495-a0f4-4c53-b932-b03b49f8cf04
-2026-03-26 22:31:49 [http-nio-8080-exec-10] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 7cd06103-ac02-402c-900c-b514ec73436f
-2026-03-26 22:31:49 [http-nio-8080-exec-12] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: caf1cac3-23ed-4ea5-9c14-1993e95870e5
-2026-03-26 22:31:49 [http-nio-8080-exec-15] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: f8da2e7a-ac92-4cc7-a162-392c177c0491
-2026-03-26 22:31:49 [http-nio-8080-exec-17] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 056f3c4e-f524-4d90-92b1-6652388ef37d
-2026-03-26 22:31:49 [http-nio-8080-exec-4] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 6aad0711-8732-44e7-8657-dc272809e295
-2026-03-26 22:31:49 [http-nio-8080-exec-5] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 6ba8976a-da05-4ca8-99ea-6fc8addd2c30
-2026-03-26 22:31:49 [http-nio-8080-exec-2] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: b5c00495-a0f4-4c53-b932-b03b49f8cf04
-2026-03-26 22:31:49 [http-nio-8080-exec-8] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 7cd06103-ac02-402c-900c-b514ec73436f
-2026-03-26 22:31:49 [http-nio-8080-exec-10] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 46aeafa8-8ec7-4126-933f-67dd4b15491f
-2026-03-26 22:31:49 [http-nio-8080-exec-15] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 056f3c4e-f524-4d90-92b1-6652388ef37d
-2026-03-26 22:31:49 [http-nio-8080-exec-3] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: 6ba8976a-da05-4ca8-99ea-6fc8addd2c30
-2026-03-26 22:31:49 [http-nio-8080-exec-16] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detectado. UUID: b5c00495-a0f4-4c53-b932-b03b49f8cf04
-2026-03-26 22:31:49 [http-nio-8080-exec-5] WARN  c.u.v.d.service.OrdenCompraService - Intento de operación duplicada detected. IdFactura=FACTURA-REPETIDA-002
-2026-03-26 22:34:06 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
-2026-03-26 22:34:07 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
-2026-03-26 22:34:07 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-03-26 22:34:07 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-03-26 22:34:07 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-01 18:39:02 [restartedMain] INFO  org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-01 18:39:02 [restartedMain] INFO  org.hibernate.orm.jdbc.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 20)
+2026-04-01 18:39:02 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-01 18:39:03 [restartedMain] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-01 18:39:03 [restartedMain] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-01 18:39:04 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
+2026-04-01 18:39:04 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/ventas-api'
+2026-04-01 18:39:04 [restartedMain] INFO  c.u.ventas.VentasApiApplication - Started VentasApiApplication in 5.763 seconds (process running for 6.534)
+2026-04-01 18:39:04 [RMI TCP Connection(3)-192.168.5.107] INFO  o.a.c.c.C.[.[.[/ventas-api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-01 18:39:04 [RMI TCP Connection(3)-192.168.5.107] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-01 18:39:04 [RMI TCP Connection(3)-192.168.5.107] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-04-01 18:40:36 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-01 18:40:36 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-04-01 18:40:36 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-01 18:40:36 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-01 18:40:36 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

@@ -29,6 +29,9 @@ public class OrdenCompraService {
 
     private static final Logger log = LoggerFactory.getLogger(OrdenCompraService.class);
 
+    // Logger específico para duplicados
+    private static final Logger logDuplicados = LoggerFactory.getLogger("LoggerDuplicados");
+
     private final Timer ordenTimer;
     private final OrdenCompraRepositoryImpl ordenCompraRepositoryImpl;
     private final OrdenCompraMapper ordenCompraMapper;
@@ -50,7 +53,8 @@ public class OrdenCompraService {
                 //Detenemos el timer para la medicion de deteccion en Prometheus al detectarlo en redis
                 sample.stop(ordenTimer);
                 // Convertimos el JSON de Redis directamente al Response que espera el Controller
-                log.warn("Intento de operación duplicada detectado. UUID: {}", idempotencyKey);
+                logDuplicados.info("Intento de operación duplicada por UUID detectado. UUID: {}, idFactura: {}", idempotencyKey, request.getIdFactura());
+
                 return objectMapper.readValue(cachedJson, OrdenCompraResponse.class);
             } catch (Exception e) {
                 log.error("Error al deserializar desde Redis: {}", e.getMessage());
@@ -64,7 +68,7 @@ public class OrdenCompraService {
         if (existente.isPresent()) {
             //Detenemos el timer para la medicion de deteccion en Prometheus al detectarlo en la base de datos
             sample.stop(ordenTimer);
-            log.warn("Intento de operación duplicada detected. IdFactura={}", request.getIdFactura());
+            logDuplicados.info("Intento de operación duplicada por idFactura detectado. UUID {},  idFactura={}", idempotencyKey, request.getIdFactura());
             OrdenCompraResponse response = ordenCompraMapper.fromDTO(existente.get());
 
             //Guardamos en session el idFactura duplicado para leerlo en el Exception Handler
