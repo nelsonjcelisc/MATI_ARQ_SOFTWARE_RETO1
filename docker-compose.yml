@@ -118,6 +118,16 @@ services:
     networks:
       - bolsa-net
 
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus_mati
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - bolsa-net
+
 networks:
   bolsa-net:
     driver: bridge

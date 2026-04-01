@@ -1,0 +1,12 @@
+global:
+  scrape_interval: 10s # Bajamos a 10s para ver los picos de Artillery más rápido
+
+scrape_configs:
+  - job_name: 'notificaciones-go'
+    static_configs:
+      - targets: ['notificaciones:2112'] # Nombre del servicio en el compose
+
+  - job_name: 'matching-engine'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['matching-engine:8080']

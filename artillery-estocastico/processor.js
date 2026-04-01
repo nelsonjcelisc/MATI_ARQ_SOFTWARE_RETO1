@@ -26,7 +26,7 @@ module.exports = {
 
     context.vars.inicio = Date.now();
     context.vars.duracion = 60000;
-    context.vars.totalObjetivo = 800;
+    context.vars.totalObjetivo = 5000;
     context.vars.totalEnviadas = 0;
     context.vars.oleadaRestante = 0;
     context.vars.forzarFinal = false;
