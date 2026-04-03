@@ -1,3 +1,37 @@
 spring:
   application:
     name: admin-api
+  profiles:
+    active: dev
+  #Redis
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      connect-timeout: 2000ms
+      timeout: 1000ms
+server:
+  port: 8080
+  servlet:
+    context-path: /admin-api
+  tomcat:
+    threads:
+      max: 50
+      min-spare: 10
+    accept-count: 100
+    max-connections: 10000
+    connection-timeout: 20000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
