@@ -35,3 +35,25 @@ management:
       enabled: true
     prometheus:
       enabled: true
+
+# Context Scorer Configuration (Layer 2 - Defense in Depth)
+security:
+  context-scorer:
+    enabled: true
+    # Score threshold: requests with score >= threshold are blocked
+    # Optimal: 0.7 (per spec sensitivity analysis)
+    # Too low (<0.5): High false positives - legitimate admins blocked
+    # Too high (>0.9): Misses attacks - attacker with partial match passes
+    threshold: 0.7
+    # Feature weights for anomaly scoring (should sum to 1.0)
+    weights:
+      device: 0.30      # Device fingerprint mismatch
+      ip: 0.30          # IP address mismatch
+      hour: 0.20        # Access hour outside normal range
+      user-agent: 0.20  # Browser/client mismatch
+    # Header names (propagated by Kong)
+    headers:
+      user-id: X-User-Id
+      user-role: X-User-Role
+      device-id: X-Device-Id
+      forwarded-for: X-Forwarded-For
