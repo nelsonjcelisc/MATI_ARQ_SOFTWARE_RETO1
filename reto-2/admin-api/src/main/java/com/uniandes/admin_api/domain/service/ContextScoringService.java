@@ -57,6 +57,7 @@ public class ContextScoringService {
                     .score(1.0)
                     .decision(Decision.BLOCKED)
                     .reason("Profile not found")
+                    .profileStatus(null) // Profile not found
                     .build();
         }
 
@@ -69,6 +70,7 @@ public class ContextScoringService {
                     .score(1.0)
                     .decision(Decision.BLOCKED)
                     .reason("Status unavailable")
+                    .profileStatus(null) // Status unavailable
                     .build();
         }
 
@@ -82,6 +84,7 @@ public class ContextScoringService {
                     .score(1.0)
                     .decision(Decision.BLOCKED)
                     .reason("Admin profile is blocked")
+                    .profileStatus(AdminProfileStatus.BLOCKED)
                     .build();
         }
 
@@ -97,6 +100,11 @@ public class ContextScoringService {
                     .score(score)
                     .decision(Decision.ALLOWED)
                     .reason("Learning mode - data collection")
+                    .profileStatus(AdminProfileStatus.LEARNING)
+                    .deviceMatch(!isDeviceAnomalous(context))
+                    .ipMatch(!isIpAnomalous(context))
+                    .hourMatch(!isHourAnomalous(context))
+                    .userAgentMatch(!isUserAgentAnomalous(context))
                     .build();
         }
 
@@ -114,6 +122,7 @@ public class ContextScoringService {
                 .score(score)
                 .decision(decision)
                 .reason(reason)
+                .profileStatus(AdminProfileStatus.ACTIVE)
                 .deviceMatch(!isDeviceAnomalous(context))
                 .ipMatch(!isIpAnomalous(context))
                 .hourMatch(!isHourAnomalous(context))
@@ -265,6 +274,9 @@ public class ContextScoringService {
         private double score;
         private Decision decision;
         private String reason;
+
+        // Profile status for metrics tracking
+        private AdminProfileStatus profileStatus;
 
         // Individual feature match results (for debugging/logging)
         @Builder.Default

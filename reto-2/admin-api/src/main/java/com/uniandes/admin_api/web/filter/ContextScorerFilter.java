@@ -4,6 +4,7 @@ import com.uniandes.admin_api.domain.model.Decision;
 import com.uniandes.admin_api.domain.service.ContextScoringService;
 import com.uniandes.admin_api.domain.service.ContextScoringService.ScoringResult;
 import com.uniandes.admin_api.infrastructure.config.ContextScorerProperties;
+import com.uniandes.admin_api.infrastructure.metrics.ContextScorerMetrics;
 import com.uniandes.admin_api.web.dto.RequestContextDTO;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -52,6 +53,7 @@ public class ContextScorerFilter extends OncePerRequestFilter {
 
     private final ContextScoringService scoringService;
     private final ContextScorerProperties properties;
+    private final ContextScorerMetrics metrics;
 
     /**
      * Paths that should be excluded from context scoring.
@@ -74,6 +76,7 @@ public class ContextScorerFilter extends OncePerRequestFilter {
 
         // Skip if filter is disabled
         if (!properties.isEnabled()) {
+            metrics.recordSkipped("disabled");
             filterChain.doFilter(request, response);
             return;
         }
@@ -84,6 +87,7 @@ public class ContextScorerFilter extends OncePerRequestFilter {
 
         // Skip excluded paths
         if (shouldSkipPath(path)) {
+            metrics.recordSkipped("excluded_path");
             filterChain.doFilter(request, response);
             return;
         }
@@ -95,6 +99,7 @@ public class ContextScorerFilter extends OncePerRequestFilter {
         // This should have been validated by Kong (Layer 1), but we enforce it here as Layer 2
         if (adminId == null || adminId.isBlank()) {
             log.warn("UNAUTHORIZED - Missing X-User-Id header for path: {}. Request blocked.", path);
+            metrics.recordMissingHeader();
             sendUnauthorizedResponse(response, "Missing required X-User-Id header");
             return;
         }
@@ -110,24 +115,38 @@ public class ContextScorerFilter extends OncePerRequestFilter {
         // Evaluate context and get scoring result
         ScoringResult result = scoringService.evaluateContext(context);
 
+        // Calculate evaluation duration
+        long durationMs = System.currentTimeMillis() - startTime;
+
+        // Record metrics for this evaluation
+        metrics.recordEvaluation(
+                result.getProfileStatus(),
+                result.getDecision(),
+                result.getScore(),
+                durationMs,
+                properties.getThreshold()
+        );
+
+        // Record profile not found if applicable
+        if (result.getProfileStatus() == null && "Profile not found".equals(result.getReason())) {
+            metrics.recordProfileNotFound();
+        }
+
         // Persist event asynchronously (does not block response)
         scoringService.persistEventAsync(context, result);
 
         // Check decision
         if (result.getDecision() == Decision.BLOCKED) {
-            // Log timing for p95 measurement (t1 per spec)
-            long responseTime = System.currentTimeMillis() - startTime;
             log.warn("BLOCKED - Admin: {}, Score: {:.2f}, Reason: {}, ResponseTime: {}ms",
-                    adminId, result.getScore(), result.getReason(), responseTime);
+                    adminId, result.getScore(), result.getReason(), durationMs);
 
             sendForbiddenResponse(response, result);
             return;
         }
 
         // Allow request through
-        long responseTime = System.currentTimeMillis() - startTime;
         log.info("ALLOWED - Admin: {}, Score: {:.2f}, ResponseTime: {}ms",
-                adminId, result.getScore(), responseTime);
+                adminId, result.getScore(), durationMs);
 
         filterChain.doFilter(request, response);
     }
