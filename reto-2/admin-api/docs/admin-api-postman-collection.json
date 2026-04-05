@@ -1,0 +1,998 @@
+{
+	"info": {
+		"_postman_id": "admin-api-context-scorer-tests",
+		"name": "Admin API - Context Scorer Tests",
+		"description": "Complete test collection for Admin API Context Scorer Filter.\n\nCovers all scenarios:\n- Authentication (missing headers)\n- Scoring (0%, 20%, 50%, 70%, 100%)\n- Profile statuses (ACTIVE, LEARNING, BLOCKED)\n- CRUD operations\n\nBased on seed data in data.sql",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080/admin-api",
+			"type": "string"
+		},
+		{
+			"key": "trustedDevice1",
+			"value": "device-corporate-macbook-001",
+			"type": "string"
+		},
+		{
+			"key": "trustedDevice2",
+			"value": "device-corporate-windows-001",
+			"type": "string"
+		},
+		{
+			"key": "trustedIp1",
+			"value": "192.168.1.100",
+			"type": "string"
+		},
+		{
+			"key": "trustedIp2",
+			"value": "10.0.0.50",
+			"type": "string"
+		},
+		{
+			"key": "trustedAgent",
+			"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+			"type": "string"
+		},
+		{
+			"key": "untrustedDevice",
+			"value": "unknown-device-xyz",
+			"type": "string"
+		},
+		{
+			"key": "untrustedIp",
+			"value": "45.33.32.156",
+			"type": "string"
+		},
+		{
+			"key": "untrustedAgent",
+			"value": "python-requests/2.28.0",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "0. Health Check",
+			"item": [
+				{
+					"name": "Ping (No Auth Required)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vendor/ping",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "ping"]
+						},
+						"description": "Health check endpoint - excluded from Context Scorer Filter.\n\nExpected: 200 OK, \"pong\""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "1. Authentication Tests",
+			"item": [
+				{
+					"name": "1.1 Missing X-User-Id Header (401)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "5"]
+						},
+						"description": "Request without X-User-Id header.\n\nExpected: 401 Unauthorized\n```json\n{\n  \"status\": 401,\n  \"error\": \"Unauthorized\",\n  \"message\": \"Missing required X-User-Id header\"\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "1.2 Empty X-User-Id Header (401)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "5"]
+						},
+						"description": "Request with empty X-User-Id header.\n\nExpected: 401 Unauthorized"
+					},
+					"response": []
+				},
+				{
+					"name": "1.3 Unknown Admin ID (403)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-unknown-999",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "5"]
+						},
+						"description": "Request with admin ID that doesn't exist in Redis.\n\nExpected: 403 Forbidden\n```json\n{\n  \"reason\": \"Profile not found\"\n}\n```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2. Scoring Tests - ACTIVE Admin",
+			"item": [
+				{
+					"name": "2.1 Score 0% - All Features Match (ALLOWED)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{trustedDevice1}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{trustedIp1}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{trustedAgent}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "5"]
+						},
+						"description": "All context features match trusted profile.\n\nScoring:\n- Device: MATCH (0.00)\n- IP: MATCH (0.00)\n- Hour: MATCH (0.00) - if within 7-18\n- Agent: MATCH (0.00)\n- **Total: 0.00**\n\nExpected: 200 OK (commission data returned)"
+					},
+					"response": []
+				},
+				{
+					"name": "2.2 Score 20% - Hour Mismatch Only (ALLOWED)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{trustedDevice1}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{trustedIp1}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{trustedAgent}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "5"]
+						},
+						"description": "NOTE: This test depends on current hour.\nRun outside business hours (before 7am or after 6pm) to get hour mismatch.\n\nScoring:\n- Device: MATCH (0.00)\n- IP: MATCH (0.00)\n- Hour: NO MATCH (+0.20) - if outside 7-18\n- Agent: MATCH (0.00)\n- **Total: 0.20**\n\nExpected: 200 OK (score < 0.7 threshold)"
+					},
+					"response": []
+				},
+				{
+					"name": "2.3 Score 30% - Device Mismatch Only (ALLOWED)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{untrustedDevice}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{trustedIp1}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{trustedAgent}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "5"]
+						},
+						"description": "Only device doesn't match trusted profile.\n\nScoring:\n- Device: NO MATCH (+0.30)\n- IP: MATCH (0.00)\n- Hour: MATCH (0.00) - if within 7-18\n- Agent: MATCH (0.00)\n- **Total: 0.30**\n\nExpected: 200 OK (score < 0.7 threshold)"
+					},
+					"response": []
+				},
+				{
+					"name": "2.4 Score 50% - Device + Agent Mismatch (ALLOWED)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{untrustedDevice}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{trustedIp1}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{untrustedAgent}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "5"]
+						},
+						"description": "Device and User-Agent don't match.\n\nScoring:\n- Device: NO MATCH (+0.30)\n- IP: MATCH (0.00)\n- Hour: MATCH (0.00) - if within 7-18\n- Agent: NO MATCH (+0.20)\n- **Total: 0.50**\n\nExpected: 200 OK (score < 0.7 threshold)"
+					},
+					"response": []
+				},
+				{
+					"name": "2.5 Score 60% - Device + IP Mismatch (ALLOWED)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{untrustedDevice}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{untrustedIp}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{trustedAgent}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "5"]
+						},
+						"description": "Device and IP don't match.\n\nScoring:\n- Device: NO MATCH (+0.30)\n- IP: NO MATCH (+0.30)\n- Hour: MATCH (0.00) - if within 7-18\n- Agent: MATCH (0.00)\n- **Total: 0.60**\n\nExpected: 200 OK (score < 0.7 threshold, just under!)"
+					},
+					"response": []
+				},
+				{
+					"name": "2.6 Score 70% - Threshold Boundary (BLOCKED)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{untrustedDevice}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{untrustedIp}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{untrustedAgent}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "5"]
+						},
+						"description": "Device, IP, and Agent don't match (hour assumed matching).\n\nScoring:\n- Device: NO MATCH (+0.30)\n- IP: NO MATCH (+0.30)\n- Hour: MATCH (0.00) - if within 7-18\n- Agent: NO MATCH (+0.20)\n- **Total: 0.80**\n\nExpected: 403 Forbidden (score >= 0.7 threshold)\n```json\n{\n  \"status\": 403,\n  \"error\": \"Forbidden\",\n  \"score\": 0.80\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "2.7 Score 100% - All Features Anomalous (BLOCKED)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{untrustedDevice}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{untrustedIp}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{untrustedAgent}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"vendorId\": \"vendor-attack\",\n  \"commissionRate\": 99.99,\n  \"effectiveFrom\": \"2026-04-01T00:00:00\",\n  \"createdBy\": \"admin-001\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "5"]
+						},
+						"description": "Simulates stolen token attack - all features anomalous.\nRun outside business hours for full 100% score.\n\nScoring:\n- Device: NO MATCH (+0.30)\n- IP: NO MATCH (+0.30)\n- Hour: NO MATCH (+0.20) - if outside 7-18\n- Agent: NO MATCH (+0.20)\n- **Total: 1.00**\n\nExpected: 403 Forbidden\n```json\n{\n  \"status\": 403,\n  \"error\": \"Forbidden\",\n  \"message\": \"Access denied due to anomalous context\",\n  \"score\": 1.00\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "2.8 Missing Device Header (Score +0.30)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{trustedIp1}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{trustedAgent}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "5"]
+						},
+						"description": "Missing X-Device-Id header is treated as anomalous.\n\nScoring:\n- Device: MISSING (+0.30)\n- IP: MATCH (0.00)\n- Hour: MATCH (0.00)\n- Agent: MATCH (0.00)\n- **Total: 0.30**\n\nExpected: 200 OK (score < 0.7)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3. Profile Status Tests",
+			"item": [
+				{
+					"name": "3.1 LEARNING Profile - Always Allowed",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-003",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{untrustedDevice}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{untrustedIp}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{untrustedAgent}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "5"]
+						},
+						"description": "admin-003 has LEARNING status.\nEven with all anomalous features, request is ALLOWED.\nData is collected for building behavioral profile.\n\nExpected: 200 OK (LEARNING mode bypasses threshold)"
+					},
+					"response": []
+				},
+				{
+					"name": "3.2 BLOCKED Profile - Always Denied",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-004",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{trustedDevice1}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{trustedIp1}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{trustedAgent}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "5"]
+						},
+						"description": "admin-004 has BLOCKED status.\nEven with all trusted features, request is DENIED.\n\nExpected: 403 Forbidden\n```json\n{\n  \"reason\": \"Admin profile is blocked\"\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "3.3 ACTIVE Profile - Second Admin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-002",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "device-corporate-macbook-002",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "192.168.2.50",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{trustedAgent}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "5"]
+						},
+						"description": "admin-002 is ACTIVE with different trusted contexts.\nUsing admin-002's trusted device and IP.\n\nExpected: 200 OK"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4. CRUD Operations",
+			"item": [
+				{
+					"name": "4.1 GET All Commissions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{trustedDevice1}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{trustedIp1}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{trustedAgent}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission"]
+						},
+						"description": "Get all vendor commissions.\n\nExpected: 200 OK with array of commissions"
+					},
+					"response": []
+				},
+				{
+					"name": "4.2 GET Commission by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{trustedDevice1}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{trustedIp1}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{trustedAgent}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "1"]
+						},
+						"description": "Get specific vendor commission by ID.\n\nExpected: 200 OK with commission object"
+					},
+					"response": []
+				},
+				{
+					"name": "4.3 POST Create Commission",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{trustedDevice1}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{trustedIp1}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{trustedAgent}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"vendorId\": \"vendor-new-001\",\n  \"commissionRate\": 5.75,\n  \"effectiveFrom\": \"2026-04-01T00:00:00\",\n  \"effectiveTo\": null,\n  \"active\": true,\n  \"createdBy\": \"admin-001\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission"]
+						},
+						"description": "Create a new vendor commission.\n\nExpected: 201 Created with new commission object"
+					},
+					"response": []
+				},
+				{
+					"name": "4.4 PUT Update Commission",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{trustedDevice1}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{trustedIp1}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{trustedAgent}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"vendorId\": \"vendor-001\",\n  \"commissionRate\": 6.25,\n  \"effectiveFrom\": \"2026-04-01T00:00:00\",\n  \"effectiveTo\": null,\n  \"active\": true,\n  \"createdBy\": \"admin-001\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "1"]
+						},
+						"description": "Update existing vendor commission.\n\nExpected: 200 OK with updated commission object"
+					},
+					"response": []
+				},
+				{
+					"name": "4.5 DELETE Commission",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{trustedDevice1}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{trustedIp1}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{trustedAgent}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "5"]
+						},
+						"description": "Delete a vendor commission.\n\nExpected: 204 No Content"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "5. Validation Tests",
+			"item": [
+				{
+					"name": "5.1 POST Missing Required Fields (400)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{trustedDevice1}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{trustedIp1}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{trustedAgent}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"commissionRate\": 5.00\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission"]
+						},
+						"description": "Missing required fields: vendorId, effectiveFrom, createdBy.\n\nExpected: 400 Bad Request with validation errors"
+					},
+					"response": []
+				},
+				{
+					"name": "5.2 POST Invalid Commission Rate (400)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{trustedDevice1}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{trustedIp1}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{trustedAgent}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"vendorId\": \"vendor-test\",\n  \"commissionRate\": 150.00,\n  \"effectiveFrom\": \"2026-04-01T00:00:00\",\n  \"createdBy\": \"admin-001\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission"]
+						},
+						"description": "Commission rate exceeds maximum (100.00).\n\nExpected: 400 Bad Request with validation error"
+					},
+					"response": []
+				},
+				{
+					"name": "5.3 GET Non-existent Commission (404)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{trustedDevice1}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{trustedIp1}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{trustedAgent}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/99999",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "99999"]
+						},
+						"description": "Request commission that doesn't exist.\n\nExpected: 404 Not Found or 500 with NoSuchElementException"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "6. Attack Simulation",
+			"item": [
+				{
+					"name": "6.1 Stolen Token - Foreign IP",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{trustedDevice1}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "185.220.101.1",
+								"type": "text",
+								"description": "Tor exit node IP"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{trustedAgent}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"vendorId\": \"vendor-001\",\n  \"commissionRate\": 99.99,\n  \"effectiveFrom\": \"2026-04-01T00:00:00\",\n  \"createdBy\": \"admin-001\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "1"]
+						},
+						"description": "Attacker has valid token and correct device, but connecting from foreign IP.\n\nScoring:\n- Device: MATCH (0.00)\n- IP: NO MATCH (+0.30)\n- Hour: MATCH (0.00)\n- Agent: MATCH (0.00)\n- **Total: 0.30**\n\nExpected: 200 OK (partial match - may need additional signals)"
+					},
+					"response": []
+				},
+				{
+					"name": "6.2 Stolen Token - Script/Bot Attack",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "{{trustedDevice1}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "{{trustedIp1}}",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "curl/7.88.1",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"vendorId\": \"vendor-001\",\n  \"commissionRate\": 99.99,\n  \"effectiveFrom\": \"2026-04-01T00:00:00\",\n  \"createdBy\": \"admin-001\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "1"]
+						},
+						"description": "Attacker using automated tool (curl) instead of browser.\n\nScoring:\n- Device: MATCH (0.00)\n- IP: MATCH (0.00)\n- Hour: MATCH (0.00)\n- Agent: NO MATCH (+0.20)\n- **Total: 0.20**\n\nExpected: 200 OK (single feature mismatch not enough)"
+					},
+					"response": []
+				},
+				{
+					"name": "6.3 Full Attack - All Anomalous",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "admin-001",
+								"type": "text"
+							},
+							{
+								"key": "X-Device-Id",
+								"value": "attacker-laptop-666",
+								"type": "text"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "185.220.101.1",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "python-requests/2.28.0",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"vendorId\": \"vendor-001\",\n  \"commissionRate\": 99.99,\n  \"effectiveFrom\": \"2026-04-01T00:00:00\",\n  \"createdBy\": \"admin-001\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/vendor/commission/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["vendor", "commission", "1"]
+						},
+						"description": "Full attack simulation - attacker has stolen token but:\n- Unknown device\n- Foreign IP\n- Automated script\n- (Possibly outside business hours)\n\nScoring:\n- Device: NO MATCH (+0.30)\n- IP: NO MATCH (+0.30)\n- Hour: MATCH/NO MATCH (+0.00/+0.20)\n- Agent: NO MATCH (+0.20)\n- **Total: 0.80 - 1.00**\n\nExpected: 403 Forbidden"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
