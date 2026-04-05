@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+    <property name="LOG_PATH" value="logs" />
+
+    <appender name="FILE_GENERAL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/ventas-api.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/archived/ventas-api.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_DUPLICADOS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/duplicados.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/archived/duplicados.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>5MB</maxFileSize>
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - ID DUPLICADO: %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNC_CONSOLE" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="CONSOLE" />
+        <queueSize>512</queueSize>
+        <neverBlock>true</neverBlock>
+    </appender>
+
+    <appender name="ASYNC_FILE_GENERAL" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="FILE_GENERAL" />
+        <queueSize>1024</queueSize>
+        <discardingThreshold>0</discardingThreshold> <neverBlock>false</neverBlock> </appender>
+
+    <appender name="ASYNC_FILE_DUPLICADOS" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="FILE_DUPLICADOS" />
+        <queueSize>512</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <neverBlock>false</neverBlock> </appender>
+
+    <logger name="LoggerDuplicados" level="INFO" additivity="false">
+        <appender-ref ref="ASYNC_FILE_DUPLICADOS" />
+    </logger>
+
+    <logger name="com.uniandes.ventas" level="DEBUG" />
+
+    <logger name="org.hibernate.engine.jdbc.spi.SqlExceptionHelper" level="ERROR" />
+
+    <root level="INFO">
+        <appender-ref ref="ASYNC_CONSOLE" />
+        <appender-ref ref="ASYNC_FILE_GENERAL" />
+    </root>
+
+</configuration>

@@ -1,21 +1,21 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/ventas-api-db?sslmode=disable&currentSchema=public
+    url: jdbc:postgresql://localhost:5432/reto2_db?sslmode=disable&currentSchema=public
     username: appuser
     password: secret
 
     # Configuración HikariCP
-    #hikari:
+    hikari:
       # Pool size
-      #maximum-pool-size: 10        # 20 workers + 5 buffer
-      #minimum-idle: 4             # Mínimo de conexiones idle
+      maximum-pool-size: 40        # 20 workers + 5 buffer
+      minimum-idle: 20           # Mínimo de conexiones idle
 
       # Timeouts
-      #connection-timeout: 20000    # 20s para obtener conexión
-      #idle-timeout: 600000         # 10min antes de cerrar idle
-      #max-lifetime: 1800000        # 30min vida máxima
-      #validation-timeout: 5000
+      connection-timeout: 5000    # 20s para obtener conexión
+      idle-timeout: 30000         # 10min antes de cerrar idle
+      max-lifetime: 1800000        # 30min vida máxima
+      validation-timeout: 2000
       #leak-detection-threshold: 60000
 
       # Nombre del pool (aparece en logs)
@@ -41,6 +41,10 @@ logging:
   level:
     #com.zaxxer.hikari: DEBUG           # Logs de HikariCP
     #com.zaxxer.hikari.pool.HikariPool: DEBUG
+    # Silencia el log de Hibernate que te asusta
+    org.hibernate.engine.jdbc.spi.SqlExceptionHelper: ERROR
+    # Silencia el error de procesamiento del Servlet
+    org.springframework.web.servlet.DispatcherServlet: ERROR
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.springframework.jdbc.core: DEBUG

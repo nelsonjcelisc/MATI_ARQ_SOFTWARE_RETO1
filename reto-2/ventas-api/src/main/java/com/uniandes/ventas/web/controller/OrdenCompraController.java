@@ -17,17 +17,13 @@ import io.micrometer.core.instrument.MeterRegistry;
 @RequiredArgsConstructor
 public class OrdenCompraController {
 
-    @Qualifier("ordenTimer")
-    private final Timer ordenTimer;
-    private final MeterRegistry registry;
     private final OrdenCompraService ordenCompraService;
 
     @PostMapping
     public ResponseEntity<OrdenCompraResponse> crearOrdenCompra(@Valid @RequestBody OrdenCompraRequest request,
                                                                 @RequestHeader("Idempotencia-Key") String idempotencyKey) {
 
-        Timer.Sample sample = Timer.start(registry);
-        OrdenCompraResponse response = ordenCompraService.crearOrdenCompra(request, idempotencyKey, sample);
+        OrdenCompraResponse response = ordenCompraService.crearOrdenCompra(request, idempotencyKey);
             return ResponseEntity.status(HttpStatus.CREATED)
                     .header("Idempotencia-Key", idempotencyKey)
                     .body(response);
