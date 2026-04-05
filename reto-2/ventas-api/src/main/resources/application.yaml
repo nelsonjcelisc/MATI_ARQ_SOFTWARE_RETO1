@@ -10,16 +10,21 @@ spring:
       port: ${REDIS_PORT:6379}
       connect-timeout: 2000ms
       timeout: 1000ms
+      lettuce:
+        pool:
+          max-active: 50
+          max-idle: 20
+          min-idle: 10
 server:
   port: 8080
   servlet:
     context-path: /ventas-api
   tomcat:
     threads:
-      max: 50
-      min-spare: 10
+      max: 200
+      min-spare: 50
 
-    accept-count: 100
+    accept-count: 200
     max-connections: 10000
     connection-timeout: 20000
 
@@ -42,8 +47,8 @@ management:
     metrics:
       enable: true
 
- # metrics:
- #   export:
+  # metrics:
+  #   export:
   #    prometheus:
   #      enabled: true
   #management.endpoints.web.exposure.include=*
