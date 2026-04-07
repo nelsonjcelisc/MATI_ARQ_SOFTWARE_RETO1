@@ -1,0 +1,53 @@
+config:
+  target: "http://localhost:8080"
+  phases:
+    # Oleada 1: calentamiento suave
+    - duration: 10
+      arrivalRate: 2
+      name: "Calentamiento"
+    # Oleada 2: rampa ascendente
+    - duration: 15
+      arrivalRate: 5
+      rampTo: 15
+      name: "Rampa ascendente"
+    # Oleada 3: pico sostenido
+    - duration: 20
+      arrivalRate: 15
+      name: "Pico sostenido"
+    # Oleada 4: burst repentino
+    - duration: 5
+      arrivalRate: 30
+      name: "Burst"
+    # Oleada 5: enfriamiento
+    - duration: 10
+      arrivalRate: 3
+      name: "Enfriamiento"
+  processor: "./processor.js"
+  plugins:
+    metrics-by-endpoint:
+      useOnlyRequestNames: true
+  defaults:
+    headers:
+      Content-Type: "application/json"
+
+scenarios:
+  - name: "Crear orden de compra (idempotencia estocástica)"
+    flow:
+      - function: "generateStochasticDelay"
+      - think: "{{ stochasticDelay }}"
+      - function: "prepareRequest"
+      - post:
+          url: "/ventas-api/api/orden_compra"
+          headers:
+            Idempotencia-Key: "{{ idempotenciaKey }}"
+          json:
+            idFactura: "{{ idFactura }}"
+            idCliente: "{{ idCliente }}"
+            fechaCompra: "{{ fechaCompra }}"
+            estado: "{{ estado }}"
+            total: "{{ total }}"
+          capture:
+            - json: "$"
+              as: "responseBody"
+          afterResponse: "logResponse"
+          name: "POST orden_compra"
