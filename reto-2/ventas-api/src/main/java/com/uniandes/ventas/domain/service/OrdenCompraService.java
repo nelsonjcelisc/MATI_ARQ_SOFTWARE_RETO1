@@ -41,29 +41,32 @@ public class OrdenCompraService {
 
         String redisKey = ConstantsVentas.REDIS_PREFIX + idempotencyKey;
         Timer.Sample sample = Timer.start(registry);
-
-        // Intento de adquirir el lock
-        Boolean isNewRequest = redisTemplate.opsForValue().setIfAbsent(
-                redisKey + ":lock",
-                "PROCESSING",
-                Duration.ofSeconds(10)
-        );
-
-        boolean lockOwner = Boolean.TRUE.equals(isNewRequest);
-
-        if (!lockOwner) {
-            sample.stop(registry.timer("orden.tiempo.total"));
-            return handleDuplicate(redisKey, idempotencyKey, request);
-        }
+        String finalStatus = "error_inesperado";
+        boolean lockOwner = false;
 
         try {
+            // Intento de adquirir el lock
+            Boolean isNewRequest = redisTemplate.opsForValue().setIfAbsent(
+                    redisKey + ":lock",
+                    "PROCESSING",
+                    Duration.ofSeconds(10)
+            );
+
+            lockOwner = Boolean.TRUE.equals(isNewRequest);
+
+            if (!lockOwner) {
+                finalStatus = "duplicate_redis";
+                return handleDuplicate(redisKey, idempotencyKey, request, finalStatus);
+            }
+
             return ejecutarPersistencia(request, idempotencyKey, redisKey, sample);
 
         } catch (DataIntegrityViolationException e) {
-            sample.stop(registry.timer("orden.tiempo.total"));
+            finalStatus = "duplicate_db";
             logDuplicados.info( "Duplicado detectado en BD. UUID={}, idFactura={}", idempotencyKey, request.getIdFactura() );
-            throw new ResponseStatusException( HttpStatus.ACCEPTED, "La petición está siendo procesada..." );
+            throw new ResponseStatusException( HttpStatus.ACCEPTED, "La petición está siendo procesada db..." );
         } finally {
+            sample.stop(registry.timer("orden.tiempo.total", "status", finalStatus));
             if (lockOwner) {
                 redisTemplate.delete(redisKey + ":lock");
             }
@@ -73,28 +76,20 @@ public class OrdenCompraService {
 
     @Transactional
     public OrdenCompraResponse ejecutarPersistencia( OrdenCompraRequest request, String idempotencyKey, String redisKey, Timer.Sample sample) {
-
-        try {
             request.setEstado(OrdenCompraStatus.PAGADA);
             request.setFechaCompra(LocalDateTime.now());
 
             OrdenCompraDTO dto = ordenCompraMapper.fromOrderCompraRequest(request);
             dto = ordenCompraRepositoryImpl.save(dto);
+            sample.stop(registry.timer("orden.tiempo.total", "status", "success"));
             OrdenCompraResponse response = ordenCompraMapper.fromDTO(dto);
-
             saveInCache(redisKey, response);
             return response;
-
-        } catch (DataIntegrityViolationException e) {
-            sample.stop(registry.timer("orden.tiempo.total"));
-            logDuplicados.info("Duplicado detectado en BD. UUID={}, idFactura={}", idempotencyKey, request.getIdFactura());
-            throw new ResponseStatusException(HttpStatus.ACCEPTED,"La petición está siendo procesada...");
-        }
     }
 
-    private OrdenCompraResponse handleDuplicate(String redisKey, String idempotencyKey, OrdenCompraRequest request) {
+    private OrdenCompraResponse handleDuplicate(String redisKey, String idempotencyKey, OrdenCompraRequest request, String finalStatus) {
         logDuplicados.info( "Duplicado detectado en BD. UUID={}, idFactura={}", idempotencyKey, request.getIdFactura() );
-        throw new ResponseStatusException(HttpStatus.ACCEPTED, "La petición está siendo procesada...");
+        throw new ResponseStatusException(HttpStatus.ACCEPTED, "La petición está siendo procesada redis... " + finalStatus);
     }
 
     private void saveInCache(String key, OrdenCompraResponse response) {
