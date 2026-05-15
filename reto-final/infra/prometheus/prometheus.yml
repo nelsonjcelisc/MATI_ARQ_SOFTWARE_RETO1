@@ -31,8 +31,8 @@ scrape_configs:
         labels:
           app: "prometheus"
           
-  - job_name: 'ventas-api'
-    metrics_path: '/ventas-api/actuator/prometheus'
+  - job_name: 'registro-lamina'
+    metrics_path: '/registro-lamina/actuator/prometheus'
     static_configs:
       #- targets: ['localhost:8080'] ejecucion prometheus local
       - targets: ["host.docker.internal:8080"] # Ejecucion prometheus desde docker

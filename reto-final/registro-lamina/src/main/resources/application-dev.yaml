@@ -1,0 +1,58 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/reto_final_db?sslmode=disable&currentSchema=public
+    username: appuser
+    password: secret
+
+    # Configuración HikariCP
+    hikari:
+      # Pool size
+      maximum-pool-size: 40        # 20 workers + 5 buffer
+      minimum-idle: 20           # Mínimo de conexiones idle
+
+      # Timeouts
+      connection-timeout: 5000    # 20s para obtener conexión
+      idle-timeout: 30000         # 10min antes de cerrar idle
+      max-lifetime: 1800000        # 30min vida máxima
+      validation-timeout: 2000
+      #leak-detection-threshold: 60000
+
+      # Nombre del pool (aparece en logs)
+      #pool-name: VentasApiPool
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+
+    properties:
+      hibernate:
+        format_sql: true
+        # Batch operations
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+  sql:
+    init:
+      mode: always
+logging:
+  level:
+    #com.zaxxer.hikari: DEBUG           # Logs de HikariCP
+    #com.zaxxer.hikari.pool.HikariPool: DEBUG
+    # Silencia el log de Hibernate que te asusta
+    org.hibernate.engine.jdbc.spi.SqlExceptionHelper: ERROR
+    # Silencia el error de procesamiento del Servlet
+    org.springframework.web.servlet.DispatcherServlet: ERROR
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.jdbc.core: DEBUG
+    com.uniandes.registro.lamina: DEBUG
+    org:
+      hibernate:
+        SQL: warn
+        type:
+          descriptor:
+            sql:
+              BasicBinder: warn
