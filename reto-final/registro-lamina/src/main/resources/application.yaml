@@ -1,3 +1,72 @@
 spring:
   application:
     name: registro-lamina
+  profiles:
+    active: dev
+  #Redis
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      connect-timeout: 2000ms
+      timeout: 1000ms
+      lettuce:
+        pool:
+          max-active: 50
+          max-idle: 20
+          min-idle: 10
+  web:
+    error:
+      include-message: always
+      include-binding-errors: never
+      include-stacktrace: never
+      include-exception: false
+server:
+  port: 8080
+  servlet:
+    context-path: /registro-lamina
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 50
+
+    accept-count: 200
+    max-connections: 10000
+    connection-timeout: 20000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        #include: health,metrics,prometheus,info,threaddump
+        include: "*"
+      #base-path: /actuator
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "registro.tiempo.total": true
+      percentiles:
+        "registro.tiempo.total": 0.95
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enable: true
+logging:
+  level:
+    root: INFO
+    com.uniandes.registro.lamina: DEBUG
+    org:
+      springframework:
+        web:
+          servlet:
+            mvc:
+              method:
+                annotation:
+                  ExceptionHandlerExceptionResolver: ERROR
+  file:
+    name: logs/registo_lamina.log
+  pattern:
+    #console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
