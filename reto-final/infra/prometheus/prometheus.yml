@@ -35,13 +35,13 @@ scrape_configs:
     metrics_path: '/registro-lamina/actuator/prometheus'
     static_configs:
       #- targets: ['localhost:8080'] ejecucion prometheus local
-      - targets: ["host.docker.internal:8080"] # Ejecucion prometheus desde docker
+      - targets: ["app:8080"] # Ejecucion prometheus desde docker
 
   - job_name: 'admin-api'
     metrics_path: '/admin-api/actuator/prometheus'
     static_configs:
       #- targets: ['localhost:8080'] ejecucion prometheus local
-      - targets: ["host.docker.internal:8080"] # Ejecucion prometheus desde docker
+      - targets: ["app:8080"] # Ejecucion prometheus desde docker
         labels:
           app: "admin-api"
           service: "context-scorer"

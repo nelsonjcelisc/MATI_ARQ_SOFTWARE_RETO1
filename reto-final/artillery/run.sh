@@ -1,0 +1,1 @@
+docker run --rm --network="host" -v "$PWD":/apps artilleryio/artillery:latest run --output /apps/report_$(date +%d%m%y_%H%M%S).json /apps/test.yml
