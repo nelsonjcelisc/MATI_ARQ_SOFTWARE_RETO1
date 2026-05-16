@@ -11,7 +11,7 @@ services:
       - "5432:5432"
     volumes:
       - pg_data:/var/lib/postgresql/data
-      - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+      #- ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U appuser -d reto_final_db"]
       interval: 5s
@@ -55,87 +55,87 @@ services:
       timeout: 5s
       retries: 10
   # ── Services ──────────────────────────────────────────────────
-  exchange-ms:
-    build: ./exchange-ms
-    container_name: exchange-ms
-    ports:
-      - "3001:3001"
-    environment:
-      NODE_ENV: development
-      PORT: 3001
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_NAME: reto_final_db
-      DB_USER: appuser
-      DB_PASSWORD: secret
-      DB_SCHEMA: exchange
-      RABBITMQ_URL: amqp://appuser:secret@rabbitmq:5672
-      COLLECTION_MS_URL: http://collection-ms:3002
-      INVENTORY_MS_URL: http://inventory-ms:3003
-    depends_on:
-      postgres:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-  collection-ms:
-    build: ./collection-ms
-    container_name: collection-ms
-    ports:
-      - "3002:3002"
-    environment:
-      NODE_ENV: development
-      PORT: 3002
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_NAME: reto_final_db
-      DB_USER: appuser
-      DB_PASSWORD: secret
-      DB_SCHEMA: collection
-      RABBITMQ_URL: amqp://appuser:secret@rabbitmq:5672
-    depends_on:
-      postgres:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-  inventory-ms:
-    build: ./inventory-ms
-    container_name: inventory-ms
-    ports:
-      - "3003:3003"
-    environment:
-      NODE_ENV: development
-      PORT: 3003
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_NAME: reto_final_db
-      DB_USER: appuser
-      DB_PASSWORD: secret
-      DB_SCHEMA: inventory
-    depends_on:
-      postgres:
-        condition: service_healthy
+  # exchange-ms:
+  #   build: ./exchange-ms
+  #   container_name: exchange-ms
+  #   ports:
+  #     - "3001:3001"
+  #   environment:
+  #     NODE_ENV: development
+  #     PORT: 3001
+  #     DB_HOST: postgres
+  #     DB_PORT: 5432
+  #     DB_NAME: reto_final_db
+  #     DB_USER: appuser
+  #     DB_PASSWORD: secret
+  #     DB_SCHEMA: exchange
+  #     RABBITMQ_URL: amqp://appuser:secret@rabbitmq:5672
+  #     COLLECTION_MS_URL: http://collection-ms:3002
+  #     INVENTORY_MS_URL: http://inventory-ms:3003
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #     rabbitmq:
+  #       condition: service_healthy
+  # collection-ms:
+  #   build: ./collection-ms
+  #   container_name: collection-ms
+  #   ports:
+  #     - "3002:3002"
+  #   environment:
+  #     NODE_ENV: development
+  #     PORT: 3002
+  #     DB_HOST: postgres
+  #     DB_PORT: 5432
+  #     DB_NAME: reto_final_db
+  #     DB_USER: appuser
+  #     DB_PASSWORD: secret
+  #     DB_SCHEMA: collection
+  #     RABBITMQ_URL: amqp://appuser:secret@rabbitmq:5672
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #     rabbitmq:
+  #       condition: service_healthy
+  # inventory-ms:
+  #   build: ./inventory-ms
+  #   container_name: inventory-ms
+  #   ports:
+  #     - "3003:3003"
+  #   environment:
+  #     NODE_ENV: development
+  #     PORT: 3003
+  #     DB_HOST: postgres
+  #     DB_PORT: 5432
+  #     DB_NAME: reto_final_db
+  #     DB_USER: appuser
+  #     DB_PASSWORD: secret
+  #     DB_SCHEMA: inventory
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
   # ── Java services ─────────────────────────────────────────────
-  registro-lamina:
-    build:
-      context: ./registro-lamina
-      dockerfile: Dockerfile
-    container_name: registro-lamina
-    ports:
-      - "8080:8080"
-    environment:
-      # Overrides application-dev.yml datasource (localhost → postgres container)
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/reto_final_db?sslmode=disable&currentSchema=public
-      SPRING_DATASOURCE_USERNAME: appuser
-      SPRING_DATASOURCE_PASSWORD: secret
-      # Matches ${REDIS_HOST:localhost} placeholder in application.yml
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      SPRING_PROFILES_ACTIVE: dev
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_started
+  # registro-lamina:
+  #   build:
+  #     context: ./registro-lamina
+  #     dockerfile: Dockerfile
+  #   container_name: registro-lamina
+  #   ports:
+  #     - "8080:8080"
+  #   environment:
+  #     # Overrides application-dev.yml datasource (localhost → postgres container)
+  #     SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/reto_final_db?sslmode=disable&currentSchema=public
+  #     SPRING_DATASOURCE_USERNAME: appuser
+  #     SPRING_DATASOURCE_PASSWORD: secret
+  #     # Matches ${REDIS_HOST:localhost} placeholder in application.yml
+  #     REDIS_HOST: redis
+  #     REDIS_PORT: 6379
+  #     SPRING_PROFILES_ACTIVE: dev
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #     redis:
+  #       condition: service_started
   # ── Observability ─────────────────────────────────────────────
   prometheus:
     image: prom/prometheus:latest
@@ -160,9 +160,9 @@ services:
       - prometheus
 
   # === AQUÍ DEBÍA IR METIDO, CON LOS MISMOS ESPACIOS ===
-  app:
+  registro-lamina:
     build: ./registro-lamina
-    container_name: microservicio-registro
+    container_name:  registro-lamina
     ports:
       - "8080:8080"
     environment:
