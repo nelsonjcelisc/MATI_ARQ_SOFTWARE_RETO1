@@ -1,0 +1,45 @@
+config:
+  target: "http://localhost:8080"
+  phases:
+    - duration: 10
+      arrivalRate: 2
+      name: "Calentamiento"
+    - duration: 15
+      arrivalRate: 5
+      rampTo: 15
+      name: "Rampa ascendente"
+    - duration: 20
+      arrivalRate: 15
+      name: "Pico sostenido"
+    - duration: 5
+      arrivalRate: 30
+      name: "Burst"
+    - duration: 10
+      arrivalRate: 3
+      name: "Enfriamiento"
+  processor: "./processor.js"
+  plugins:
+    metrics-by-endpoint:
+      useOnlyRequestNames: true
+  defaults:
+    headers:
+      Content-Type: "application/json"
+
+scenarios:
+  - name: "Registro de lámina (Control Idempotencia Concurrente)"
+    flow:
+      - function: "generateStochasticDelay"
+      - think: "{{ stochasticDelay }}"
+      - function: "prepareRequest"
+      - post:
+          url: "/registro-lamina/api/registro_lamina"
+          headers:
+            Idempotencia-Key: "{{ idempotenciaKey }}"
+          json:
+            idUsuario: "{{ idUsuario }}"
+            idLamina: "{{ idLamina }}"
+          capture:
+            - json: "$"
+              as: "responseBody"
+          afterResponse: "logResponse"
+          name: "POST registro_lamina"

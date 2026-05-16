@@ -158,6 +158,25 @@ services:
       - grafana_data:/var/lib/grafana
     depends_on:
       - prometheus
+
+  # === AQUÍ DEBÍA IR METIDO, CON LOS MISMOS ESPACIOS ===
+  app:
+    build: ./registro-lamina
+    container_name: microservicio-registro
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/reto_final_db
+      - SPRING_DATASOURCE_USERNAME=appuser
+      - SPRING_DATASOURCE_PASSWORD=secret
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_PORT=6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
 volumes:
   pg_data:
   redis_data:
