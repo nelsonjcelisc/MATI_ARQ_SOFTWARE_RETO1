@@ -11,7 +11,7 @@ RUN mvn generate-sources
 RUN mvn package -DskipTests
 
 # Etapa de ejecución (Runtime)
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:17-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
