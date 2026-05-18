@@ -11,7 +11,7 @@ const envSchema = Joi.object({
     DB_NAME: Joi.string().default('reto_final_db'),
     DB_USER: Joi.string().required(),
     DB_PASSWORD: Joi.string().required(),
-    DB_SCHEMA: Joi.string().required().default('inventory')
+    DB_SCHEMA: Joi.string().default('inventory')
 }).unknown(true);
 
 const {error, value: env} = envSchema.validate(process.env);

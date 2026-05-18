@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import client from 'prom-client';
-import inventoryRoutes from './routes/inventory.routes.js';
+import inventoryRoutes from './routes/inventory.route.js';
 import { errorHandler } from './middlewares/error-handler.middleware.js';
 
 // Prometheus — default metrics (CPU, memory, event loop lag, etc.)

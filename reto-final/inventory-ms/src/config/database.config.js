@@ -23,6 +23,7 @@ export async function connectDB() {
         await sequelize.authenticate();
         await sequelize.query(`SET search_path TO ${env.DB_SCHEMA}`);
         await sequelize.sync({ alter: true });
+        console.log('✓ PostgreSQL connected successfully');
     } catch(err) {
         console.error('✗ PostgreSQL connection failed:', err.message);
         process.exit(1); //Se usa ahí porque si la base de datos falla al conectarse, la aplicación no podrá funcionar de todos modos y es mejor detenerla por completo.

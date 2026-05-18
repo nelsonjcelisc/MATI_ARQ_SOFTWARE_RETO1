@@ -34,7 +34,7 @@ InventoryItem.init({
 }, {
     sequelize,
     modelName: 'InventoryItem',
-    tableName: 'Inventory_items',
+    tableName: 'inventory_items',
     schema: env.DB_SCHEMA,
     timestamps: true,
     underscored: true

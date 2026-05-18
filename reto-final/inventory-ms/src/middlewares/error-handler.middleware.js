@@ -18,6 +18,6 @@ export function errorHandler(err, req, res, next) {
     res.status(statusCode).json({
         success: false,
         message,
-        ... (env.NODE_ENV === 'production' && {stack: err.stack }), //El operador ... En JavaScript, si haces true && { objeto }, el resultado es { objeto } este se integra al padre
+        ... (env.NODE_ENV === 'development' && {stack: err.stack }), //El operador ... En JavaScript, si haces true && { objeto }, el resultado es { objeto } este se integra al padre
     })
 }

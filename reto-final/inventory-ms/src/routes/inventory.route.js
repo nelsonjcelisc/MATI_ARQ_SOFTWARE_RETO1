@@ -9,6 +9,6 @@ inventoryRoutes.get('/', inventoryController.getAll);
 inventoryRoutes.get('/sticker/:stickerId', inventoryController.getBySticker);
 inventoryRoutes.get('/owner/:ownerId', inventoryController.getByOwner);
 inventoryRoutes.post('/', validateRequest(createItemSchema), inventoryController.create);
-inventoryRoutes.post('/sticker/:stickerId/owner', validateRequest(transferOwnershipSchema), inventoryController.transferOwnership);
+inventoryRoutes.patch('/sticker/:stickerId/owner', validateRequest(transferOwnershipSchema), inventoryController.transferOwnership);
 
 export default inventoryRoutes;
