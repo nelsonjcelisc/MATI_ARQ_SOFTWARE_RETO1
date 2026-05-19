@@ -1,14 +1,23 @@
 import * as collectionClient from '../../clients/collection.client.js';
 
-export async function execute(exchange) {
-  const toRelease = [exchange.hostStickerId, exchange.guestStickerId].filter(Boolean);
+// Stickers may be RESERVED (never transferred) or EXCHANGED (transfer completed before failure).
+// Try release first; if it fails, revert ownership back to the original owner then release.
+async function releaseOne(stickerId, originalOwnerId) {
+  try {
+    await collectionClient.release(stickerId);
+  } catch {
+    await collectionClient.revertTransfer(stickerId, originalOwnerId);
+    await collectionClient.release(stickerId);
+  }
+}
 
-  for (const stickerId of toRelease) {
-    try {
-      await collectionClient.release(stickerId);
-    } catch (err) {
-      console.error(`⚠ Failed to release sticker ${stickerId}:`, err.message);
-      throw err;
-    }
+export async function execute(exchange) {
+  const stickers = [
+    { id: exchange.hostStickerId,  originalOwnerId: exchange.hostCollectorId },
+    { id: exchange.guestStickerId, originalOwnerId: exchange.guestCollectorId },
+  ].filter(s => s.id);
+
+  for (const { id, originalOwnerId } of stickers) {
+    await releaseOne(id, originalOwnerId);
   }
 }

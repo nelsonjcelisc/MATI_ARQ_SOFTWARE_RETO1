@@ -12,10 +12,14 @@ export async function publishAlbumRecalculate(exchangeId, collectorIds) {
 export async function publishDeadLetter(exchange, error) {
   const channel = getChannel();
   const payload = JSON.stringify({
-    exchangeId: exchange.id,
-    sagaLog:    exchange.sagaLog,
-    error:      error.message,
-    timestamp:  new Date(),
+    exchangeId:       exchange.id,
+    hostStickerId:    exchange.hostStickerId,
+    guestStickerId:   exchange.guestStickerId,
+    hostCollectorId:  exchange.hostCollectorId,
+    guestCollectorId: exchange.guestCollectorId,
+    sagaLog:          exchange.sagaLog,
+    error:            error.message,
+    timestamp:        new Date(),
   });
   channel.publish('saga.compensation.dead-letter', '', Buffer.from(payload), {
     persistent:  true,
