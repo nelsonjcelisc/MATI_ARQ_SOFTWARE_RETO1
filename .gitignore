@@ -1,0 +1,13 @@
+# Node — aplica a todos los servicios en subdirectorios
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables — nunca commitear credenciales
+.env
+*.env.local
+
+# OS
+.DS_Store
+Thumbs.db

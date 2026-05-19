@@ -1,0 +1,76 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# STEP 3 — Chaos / Compensation Stress Test
+# Each VU creates its own unique sticker pair via beforeScenario (setupPair).
+# chaosMode: true forces transferB to always fail → orchestrator compensates → FAILED.
+# Run with: bash 04-chaos-run.sh
+# ─────────────────────────────────────────────────────────────────────────────
+config:
+  target: "http://host.docker.internal:3001"
+
+  phases:
+    - duration: 10
+      arrivalRate: 5
+      name: "Calentamiento"
+    - duration: 20
+      arrivalRate: 5
+      rampTo: 20
+      name: "Rampa ascendente"
+    - duration: 30
+      arrivalRate: 20
+      name: "Pico sostenido"
+    - duration: 10
+      arrivalRate: 5
+      name: "Enfriamiento"
+
+  processor: "./saga-processor.js"
+
+  plugins:
+    metrics-by-endpoint:
+      useOnlyRequestNames: true
+    expect: {}
+
+  defaults:
+    headers:
+      Content-Type: "application/json"
+
+scenarios:
+  - name: "SAGA Execute - Chaos / Compensation"
+    beforeScenario:
+      - "setupPair"
+    flow:
+      - post:
+          url: "/api/v1/exchanges"
+          json:
+            hostCollectorId: "{{ hostCollectorId }}"
+            guestCollectorId: "{{ guestCollectorId }}"
+          capture:
+            - json: "$.data.id"
+              as: exchangeId
+          name: "POST create exchange"
+
+      - post:
+          url: "/api/v1/exchanges/{{ exchangeId }}/offer"
+          json:
+            stickerId: "{{ hostStickerId }}"
+            collectorRole: "host"
+          expect:
+            - statusCode: 200
+          name: "POST offer host"
+
+      - post:
+          url: "/api/v1/exchanges/{{ exchangeId }}/offer"
+          json:
+            stickerId: "{{ guestStickerId }}"
+            collectorRole: "guest"
+          expect:
+            - statusCode: 200
+          name: "POST offer guest"
+
+      - post:
+          url: "/api/v1/exchanges/{{ exchangeId }}/execute"
+          json:
+            chaosMode: true
+          expect:
+            - statusCode: 500
+          afterResponse: "logChaosResult"
+          name: "POST execute (chaos)"

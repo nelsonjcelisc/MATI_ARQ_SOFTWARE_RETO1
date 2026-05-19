@@ -1,0 +1,80 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# STEP 2 — Happy Path Stress Test
+# Each VU creates its own unique sticker pair via beforeScenario (setupPair),
+# so concurrent VUs never compete for the same reservation.
+# Run with: bash 03-happy-run.sh
+# ─────────────────────────────────────────────────────────────────────────────
+config:
+  target: "http://host.docker.internal:3001"
+
+  phases:
+    - duration: 10
+      arrivalRate: 5
+      name: "Calentamiento"
+    - duration: 20
+      arrivalRate: 5
+      rampTo: 20
+      name: "Rampa ascendente"
+    - duration: 30
+      arrivalRate: 20
+      name: "Pico sostenido"
+    - duration: 10
+      arrivalRate: 5
+      name: "Enfriamiento"
+
+  processor: "./saga-processor.js"
+
+  plugins:
+    metrics-by-endpoint:
+      useOnlyRequestNames: true
+    expect: {}
+
+  defaults:
+    headers:
+      Content-Type: "application/json"
+
+  ensure:
+    thresholds:
+      - http.response_time.p95: 3000
+      - http.response_time.p99: 5000
+
+scenarios:
+  - name: "SAGA Execute - Happy Path"
+    beforeScenario:
+      - "setupPair"
+    flow:
+      - post:
+          url: "/api/v1/exchanges"
+          json:
+            hostCollectorId: "{{ hostCollectorId }}"
+            guestCollectorId: "{{ guestCollectorId }}"
+          capture:
+            - json: "$.data.id"
+              as: exchangeId
+          name: "POST create exchange"
+
+      - post:
+          url: "/api/v1/exchanges/{{ exchangeId }}/offer"
+          json:
+            stickerId: "{{ hostStickerId }}"
+            collectorRole: "host"
+          expect:
+            - statusCode: 200
+          name: "POST offer host"
+
+      - post:
+          url: "/api/v1/exchanges/{{ exchangeId }}/offer"
+          json:
+            stickerId: "{{ guestStickerId }}"
+            collectorRole: "guest"
+          expect:
+            - statusCode: 200
+          name: "POST offer guest"
+
+      - post:
+          url: "/api/v1/exchanges/{{ exchangeId }}/execute"
+          json: {}
+          expect:
+            - statusCode: 200
+          afterResponse: "logSagaResult"
+          name: "POST execute (happy)"
