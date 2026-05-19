@@ -10,8 +10,8 @@ const exchangeService = {
     return orchestrator.offerSticker(exchangeId, stickerId, collectorRole);
   },
 
-  async execute(exchangeId) {
-    return orchestrator.executeExchange(exchangeId);
+  async execute(exchangeId, chaosMode = false) {
+    return orchestrator.executeExchange(exchangeId, chaosMode);
   },
 
   async getById(exchangeId) {

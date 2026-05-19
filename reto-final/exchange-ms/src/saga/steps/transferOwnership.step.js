@@ -1,6 +1,6 @@
 import * as collectionClient from '../../clients/collection.client.js';
 import * as inventoryClient  from '../../clients/inventory.client.js';
-import env from '../../config/env.config.js';
+import env                   from '../../config/env.config.js';
 
 async function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -26,7 +26,10 @@ async function singleRevert(stickerId, fromId, toId) {
   await inventoryClient.revertTransfer(stickerId, toId, fromId);
 }
 
-export async function execute(exchange) {
+// chaosMode=true → transfer B calls /owner/fail on collection-ms (always 500).
+// Transfer A runs normally and succeeds, so succeeded=[A] when B throws.
+// The catch block then reverts A, giving us a deterministic compensation cycle.
+export async function execute(exchange, chaosMode = false) {
   const { hostCollectorId, guestCollectorId, hostStickerId, guestStickerId } = exchange;
 
   const succeeded = [];
@@ -37,7 +40,12 @@ export async function execute(exchange) {
   };
 
   const transferB = async () => {
-    await withRetry(() => singleTransfer(guestStickerId, guestCollectorId, hostCollectorId));
+    if (chaosMode) {
+      // Hits the dedicated /fail endpoint — always 500, no DB changes on collection-ms side.
+      await collectionClient.failTransferOwnership(guestStickerId);
+    } else {
+      await withRetry(() => singleTransfer(guestStickerId, guestCollectorId, hostCollectorId));
+    }
     succeeded.push({ stickerId: guestStickerId, fromId: guestCollectorId, toId: hostCollectorId });
   };
 

@@ -19,7 +19,8 @@ const exchangeController = {
 
   async execute(req, res, next) {
     try {
-      const exchange = await exchangeService.execute(req.params.id);
+      const chaosMode = req.body?.chaosMode === true;
+      const exchange  = await exchangeService.execute(req.params.id, chaosMode);
       res.status(200).json({ success: true, data: exchange });
     } catch (err) { next(err); }
   },

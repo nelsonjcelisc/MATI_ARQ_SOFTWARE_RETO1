@@ -8,4 +8,6 @@ router.post('/',                      stickerController.create);
 router.post('/:id/reserve',           stickerController.reserve);
 router.post('/:id/release',           stickerController.release);
 router.patch('/:id/owner',            stickerController.transferOwnership);
+router.patch('/:id/owner/revert',     stickerController.revertTransferOwnership);
+router.patch('/:id/owner/fail',       stickerController.failTransferOwnership);
 export default router;
